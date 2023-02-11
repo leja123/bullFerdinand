@@ -1,33 +1,54 @@
 #include <SDL.h>
 #include <iostream>
-#include "Game.h"
 
 using namespace std;
 
-Game *game = nullptr;
+//Screen dimension constants
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 
+int main( int argc, char* args[] )
+{
+	//The window we'll be rendering to
+	SDL_Window* window = NULL;
 
-int main( int argc, char* args[] ){
+	//The surface contained by the window
+	SDL_Surface* screenSurface = NULL;
 
-    game = new Game();
+	//Initialize SDL
+	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+	{
+		cout<<"SDL could not initialize! SDL_Error: \n"<< SDL_GetError() <<endl;
+	}
+	else
+	{
+		//Create window
+		window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		if( window == NULL )
+		{
+			cout<<"Window could not be created! SDL_Error: \n"<<SDL_GetError()<<endl;
+		}
+		else
+		{
+			//Get window surface
+			screenSurface = SDL_GetWindowSurface( window );
 
-    game->init("Bull Ferdinand", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN );
+			//Fill the surface white
+			SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
 
-    while(game->running()){
-        game->handleEvents();
-        game->update();
-        game->render();
-    }
+			//Update the surface
+			SDL_UpdateWindowSurface( window );
 
-    game->clean();
+            //Hack to get window to stay up
+            SDL_Event e; bool quit = false; while( quit == false ){ while( SDL_PollEvent( &e ) ){ if( e.type == SDL_QUIT ) quit = true; } }
+		}
+	}
 
-	/*SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Window *window = SDL_CreateWindow("Bull Ferdinand", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 400, SDL_WINDOW_SHOWN);
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+	//Destroy window
+	SDL_DestroyWindow( window );
 
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-	SDL_RenderClear(renderer);
-	SDL_RenderPresent(renderer);
-	SDL_Delay(300); */
+	//Quit SDL subsystems
+	SDL_Quit();
+
 	return 0;
 }
