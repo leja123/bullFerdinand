@@ -1,7 +1,9 @@
 # depslib dependency file v1.0
-1676303363 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
+1676306849 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
 	<SDL.h>
-	<stdio.h>
+	<iostream>
+	<ctime>
+	"player.h"
 
 1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -392,4 +394,13 @@
 1676064285 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
 	"Game.h"
 	"SDL.h"
+
+1676306779 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.h
+	<iostream>
+	<SDL.h>
+
+1676306864 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
+	<iostream>
+	<SDL.h>
+	"player.h"
 
