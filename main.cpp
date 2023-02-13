@@ -2,6 +2,7 @@
 #include <iostream>
 #include <ctime>
 #include "player.h"
+
 using namespace std;
 
 const int SCREEN_WIDTH = 1280;
@@ -24,6 +25,8 @@ SDL_Surface *gScreenSurface = NULL;
 
 //background image
 SDL_Surface *gBackground = NULL;
+
+SDL_Surface *gPlayer = NULL;
 
 bool init()
 {
@@ -68,6 +71,9 @@ bool loadMedia()
 		success = false;
 	}
 
+    gPlayer=SDL_LoadBMP("player.bmp");
+
+
 	return success;
 }
 
@@ -108,7 +114,7 @@ int main( int argc, char* args[] )
 		{
 			//Apply the image
 			SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
-
+            SDL_BlitSurface( gPlayer, NULL, gScreenSurface, NULL );
 			//Update the surface
 			SDL_UpdateWindowSurface( gWindow );
             x.test();
