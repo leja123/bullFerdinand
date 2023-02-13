@@ -114,7 +114,14 @@ int main( int argc, char* args[] )
 		{
 			//Apply the image
 			SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
-            SDL_BlitSurface( gPlayer, NULL, gScreenSurface, NULL );
+            //render player
+            SDL_Rect dest;
+            dest.x = x.xPlayer;
+            dest.y = x.yPlayer;
+            dest.w = 60;
+            dest.h = 60;
+            SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &dest );
+
 			//Update the surface
 			SDL_UpdateWindowSurface( gWindow );
             x.test();

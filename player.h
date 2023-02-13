@@ -4,11 +4,11 @@
 #include <SDL.h>
 
 class Player {
+  public:
     int xPlayer;
     int yPlayer;
     int playerXP;
     int playerLife;
-  public:
     Player();
     void renderPlayer();
     void test();
