@@ -37,12 +37,12 @@ SDL_Surface *gScreenSurface = NULL;
 //background image
 SDL_Surface *gBackground = NULL;
 
-SDL_Surface *gPlayer = NULL;
+
 
 SDL_Surface* gKeyPressSurfaces[ KEY_PRESS_SURFACE_TOTAL ];
 
 //Current displayed image
-SDL_Surface* gCurrentSurface = NULL;
+SDL_Surface *gPlayer = NULL;
 
 bool init()
 {
@@ -88,7 +88,8 @@ bool loadMedia()
 	}
 
     gPlayer=SDL_LoadBMP("player.bmp");
-    gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = loadSurface( "press.bmp" );
+
+    gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = loadSurface( "default.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == NULL )
     {
         printf( "Failed to load default image!\n" );
@@ -184,7 +185,7 @@ int main( int argc, char* args[] )
             SDL_Event e;
 
             //Set default current surface
-            gCurrentSurface = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
+            gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
 
             //While application is running
             while( !quit )
@@ -204,30 +205,27 @@ int main( int argc, char* args[] )
                         switch( e.key.keysym.sym )
                         {
                             case SDLK_UP:
-                            gCurrentSurface = gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ];
+                            gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ];
                             break;
 
                             case SDLK_DOWN:
-                            gCurrentSurface = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ];
+                            gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ];
                             break;
 
                             case SDLK_LEFT:
-                            gCurrentSurface = gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ];
+                            gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ];
                             break;
 
                             case SDLK_RIGHT:
-                            gCurrentSurface = gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ];
+                            gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ];
                             break;
 
                             default:
-                            gCurrentSurface = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
+                            gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
                             break;
                         }
                     }
                 }
-                //Apply the current image
-               SDL_BlitSurface( gCurrentSurface, NULL, gScreenSurface, NULL );
-
                 //Update the surface
                 SDL_UpdateWindowSurface( gWindow );
 			//render background
@@ -240,11 +238,13 @@ int main( int argc, char* args[] )
             dest.h = 60;
             SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &dest );
 
-			//Update the surface
+
+
+			/*//Update the surface
 			SDL_UpdateWindowSurface( gWindow );
             x.test();
             //Hack to get window to stay up
-            SDL_Event e; bool quit = false; while( quit == false ){ while( SDL_PollEvent( &e ) ){ if( e.type == SDL_QUIT ) quit = true; } }
+            SDL_Event e; bool quit = false; while( quit == false ){ while( SDL_PollEvent( &e ) ){ if( e.type == SDL_QUIT ) quit = true; } }*/
 		}
 	}
 
