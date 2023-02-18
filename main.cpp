@@ -206,18 +206,22 @@ int main( int argc, char* args[] )
                         {
                             case SDLK_UP:
                             gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ];
+                            x.yPlayer-=10;
                             break;
 
                             case SDLK_DOWN:
                             gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ];
+                            x.yPlayer+=10;
                             break;
 
                             case SDLK_LEFT:
                             gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ];
+                            x.xPlayer-=10;
                             break;
 
                             case SDLK_RIGHT:
                             gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ];
+                            x.xPlayer+=10;
                             break;
 
                             default:
