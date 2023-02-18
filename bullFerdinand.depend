@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1676723763 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
+1676728023 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
 	<SDL.h>
 	<iostream>
 	<ctime>
 	"player.h"
+	"arena.h"
 
 1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -399,8 +400,13 @@
 	<iostream>
 	<SDL.h>
 
-1676307014 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
+1676727468 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
 	<iostream>
-	<SDL.h>
 	"player.h"
+
+1676727547 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\arena.cpp
+	<iostream>
+	"arena.h"
+
+1676727460 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\arena.h
 

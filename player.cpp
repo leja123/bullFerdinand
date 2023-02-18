@@ -1,5 +1,4 @@
 #include <iostream>
-#include <SDL.h>
 #include "player.h"
 
 using namespace std;
@@ -14,3 +13,5 @@ Player::Player(){
 void Player::test(){
     cout<<xPlayer<<" "<<yPlayer<<" "<<playerXP<<" "<<playerLife;
 }
+
+

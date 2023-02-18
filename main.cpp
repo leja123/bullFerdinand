@@ -2,6 +2,7 @@
 #include <iostream>
 #include <ctime>
 #include "player.h"
+#include "arena.h"
 
 using namespace std;
 
@@ -37,12 +38,12 @@ SDL_Surface *gScreenSurface = NULL;
 //background image
 SDL_Surface *gBackground = NULL;
 
-
-
 SDL_Surface* gKeyPressSurfaces[ KEY_PRESS_SURFACE_TOTAL ];
 
 //Current displayed image
 SDL_Surface *gPlayer = NULL;
+
+SDL_Surface *gArena = NULL;
 
 bool init()
 {
@@ -89,10 +90,12 @@ bool loadMedia()
 
     gPlayer=SDL_LoadBMP("player.bmp");
 
+    gArena=SDL_LoadBMP("arena.bmp");
+
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = loadSurface( "default.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == NULL )
     {
-        printf( "Failed to load default image!\n" );
+        cout<<"Failed to load default image!\n";
         success = false;
     }
 
@@ -100,7 +103,7 @@ bool loadMedia()
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] = loadSurface( "up.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] == NULL )
     {
-        printf( "Failed to load up image!\n" );
+        cout<<"Failed to load up image!\n";
         success = false;
     }
 
@@ -108,7 +111,7 @@ bool loadMedia()
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ] = loadSurface( "down.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ] == NULL )
     {
-        printf( "Failed to load down image!\n" );
+        cout<<"Failed to load down image!\n";
         success = false;
     }
 
@@ -116,7 +119,7 @@ bool loadMedia()
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ] = loadSurface( "left.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ] == NULL )
     {
-        printf( "Failed to load left image!\n" );
+        cout<<"Failed to load left image!\n";
         success = false;
     }
 
@@ -124,7 +127,7 @@ bool loadMedia()
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ] = loadSurface( "right.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ] == NULL )
     {
-        printf( "Failed to load right image!\n" );
+        cout<<"Failed to load right image!\n";
         success = false;
     }
 
@@ -163,6 +166,7 @@ int main( int argc, char* args[] )
 {
     srand(time(NULL));
     Player x;
+    Arena y;
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -234,6 +238,16 @@ int main( int argc, char* args[] )
                 SDL_UpdateWindowSurface( gWindow );
 			//render background
 			SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
+
+
+
+            SDL_Rect destA;
+            destA.x = y.xArena;
+            destA.y = y.yArena;
+            destA.w = 300;
+            destA.h = 200;
+            SDL_BlitScaled( gArena, NULL, gScreenSurface, &destA );
+
             //render player on radnom location
             SDL_Rect dest;
             dest.x = x.xPlayer;
@@ -241,7 +255,6 @@ int main( int argc, char* args[] )
             dest.w = 60;
             dest.h = 60;
             SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &dest );
-
 
 
 			/*//Update the surface
