@@ -37,6 +37,8 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2" />
 			<Add directory="C:/Users/HP/Desktop/LEJA/programiranje/sdl2/SDL2-devel-2.0.22-mingw/SDL2-2.0.22/i686-w64-mingw32/lib" />
 		</Linker>
+		<Unit filename="arena.cpp" />
+		<Unit filename="arena.h" />
 		<Unit filename="bullFerdinand.cbp" />
 		<Unit filename="bullFerdinand.depend" />
 		<Unit filename="bullFerdinand.layout" />

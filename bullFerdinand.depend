@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1676728023 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
+1676806488 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
 	<SDL.h>
 	<iostream>
 	<ctime>
@@ -400,7 +400,7 @@
 	<iostream>
 	<SDL.h>
 
-1676727468 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
+1676806165 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
 	<iostream>
 	"player.h"
 
