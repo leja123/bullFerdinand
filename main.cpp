@@ -239,9 +239,8 @@ int main( int argc, char* args[] )
 			//render background
 			SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
 
-			//render arenas
+			//renders arenas if player is less than 100px away
 			if(x.xPlayer<y.xArena+400 && x.xPlayer>y.xArena-100 && x.yPlayer<y.yArena+300 && x.yPlayer>y.yArena-100 ){
-                {
                 SDL_Rect destA;
                 destA.x = y.xArena;
                 destA.y = y.yArena;
@@ -249,10 +248,7 @@ int main( int argc, char* args[] )
                 destA.h = 200;
                 SDL_BlitScaled( gArena, NULL, gScreenSurface, &destA );
 
-			}}
-
-
-
+			}
 
 
             //render player on radnom location
