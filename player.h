@@ -12,7 +12,7 @@ class Player {
     Player();
     void renderPlayer();
     void test();
-
+    void offScreen();
 };
 
 #endif // PLAYER_H
