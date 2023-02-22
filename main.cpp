@@ -166,7 +166,7 @@ int main( int argc, char* args[] )
 {
     srand(time(NULL));
     Player x;
-    Arena y[5];
+    Arena y;
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -239,15 +239,20 @@ int main( int argc, char* args[] )
 			//render background
 			SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
 
-            for(int i=0; i<5; i++){
+			//render arenas
+			if(x.xPlayer<y.xArena+400 && x.xPlayer>y.xArena-100 && x.yPlayer<y.yArena+300 && x.yPlayer>y.yArena-100 ){
+                {
                 SDL_Rect destA;
-                destA.x = y[i].xArena;
-                destA.y = y[i].yArena;
+                destA.x = y.xArena;
+                destA.y = y.yArena;
                 destA.w = 300;
                 destA.h = 200;
                 SDL_BlitScaled( gArena, NULL, gScreenSurface, &destA );
-            }
-            //render arena
+
+			}}
+
+
+
 
 
             //render player on radnom location
