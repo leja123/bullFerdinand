@@ -8,4 +8,10 @@ class Arena {
     Arena();
 };
 
+class Enemy{
+  public:
+    int xEnemy;
+    int yEnemy;
+    Enemy();
+};
 #endif // ARENA_H

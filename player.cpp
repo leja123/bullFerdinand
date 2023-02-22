@@ -4,8 +4,8 @@
 using namespace std;
 
 Player::Player(){
-    xPlayer=rand()%(1280-0)+0;
-    yPlayer=rand()%(720-0)+0;
+    xPlayer=rand()%(1220-0)+0;
+    yPlayer=rand()%(660-0)+0;
     playerXP=0;
     playerLife=100;
 

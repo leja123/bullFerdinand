@@ -45,6 +45,8 @@ SDL_Surface *gPlayer = NULL;
 
 SDL_Surface *gArena = NULL;
 
+SDL_Surface *gEnemy = NULL;
+
 bool init()
 {
 	//Initialization flag
@@ -91,6 +93,8 @@ bool loadMedia()
     gPlayer=SDL_LoadBMP("player.bmp");
 
     gArena=SDL_LoadBMP("arena.bmp");
+
+    gEnemy=SDL_LoadBMP("enemy.bmp");
 
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = loadSurface( "default.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == NULL )
@@ -167,6 +171,7 @@ int main( int argc, char* args[] )
     srand(time(NULL));
     Player x;
     Arena y;
+    Enemy z[3];
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -255,7 +260,6 @@ int main( int argc, char* args[] )
 
 			}
 
-
             //render player on radnom location
             SDL_Rect dest;
             dest.x = x.xPlayer;
@@ -264,13 +268,17 @@ int main( int argc, char* args[] )
             dest.h = 60;
             SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &dest );
 
+            for(int i=0; i<3; i++){
+                SDL_Rect destE;
+                destE.x = z[i].xEnemy;
+                destE.y = z[i].yEnemy;
+                destE.w = 60;
+                destE.h = 60;
+                SDL_BlitScaled( gEnemy, NULL, gScreenSurface, &destE );
+            }
 
 
-			/*//Update the surface
-			SDL_UpdateWindowSurface( gWindow );
-            x.test();
-            //Hack to get window to stay up
-            SDL_Event e; bool quit = false; while( quit == false ){ while( SDL_PollEvent( &e ) ){ if( e.type == SDL_QUIT ) quit = true; } }*/
+
 		}
 	}
 

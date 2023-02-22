@@ -9,3 +9,8 @@ Arena::Arena(){
     yArena=rand()%(520-0)+0;
 
 }
+
+Enemy::Enemy(){
+    xEnemy=rand()%(1220-0)+0;
+    yEnemy=rand()%(660-0)+0;
+}
