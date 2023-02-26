@@ -19,6 +19,7 @@ class Enemy : public Player{
   public:
     int xEnemy;
     int yEnemy;
+    int enemyLife;
     Enemy();
 
 };

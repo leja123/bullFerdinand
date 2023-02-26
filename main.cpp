@@ -3,7 +3,7 @@
 #include <ctime>
 #include "player.h"
 #include "arena.h"
-#include "enemy.h"
+
 
 using namespace std;
 
@@ -91,7 +91,6 @@ bool loadMedia()
 		success = false;
 	}
 
-    gPlayer=SDL_LoadBMP("player.bmp");
 
     gArena=SDL_LoadBMP("arena.bmp");
 
@@ -276,6 +275,7 @@ int main( int argc, char* args[] )
             dest.h = 60;
             SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &dest );
 
+            //render enemies
             for(int i=0; i<3; i++){
                 SDL_Rect destE;
                 destE.x = z[i].xEnemy;
@@ -283,16 +283,21 @@ int main( int argc, char* args[] )
                 destE.w = 60;
                 destE.h = 60;
                 SDL_BlitScaled( gEnemy, NULL, gScreenSurface, &destE );
+                //chases player if less than 200px away
+                if(x.xPlayer<z[i].xEnemy+200 && x.xPlayer>z[i].xEnemy-200 && x.yPlayer<z[i].yEnemy+200 && x.yPlayer>z[i].yEnemy-200){
+                    if(z[i].xEnemy>x.xPlayer)
+                        z[i].xEnemy--;
+                    else
+                        z[i].xEnemy++;
+                    if(z[i].yEnemy>x.yPlayer)
+                        z[i].yEnemy--;
+                    else
+                        z[i].yEnemy++;
+                }
+
             }
 
-            if(z[1].xEnemy>x.xPlayer)
-                z[1].xEnemy--;
-            else
-                z[1].xEnemy++;
-            if(z[1].yEnemy>x.yPlayer)
-                z[1].yEnemy--;
-            else
-                z[1].yEnemy++;
+
 
 
 
