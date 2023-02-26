@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1677096079 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
+1677163152 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
 	<SDL.h>
 	<iostream>
 	<ctime>
@@ -408,5 +408,5 @@
 	<iostream>
 	"arena.h"
 
-1677095740 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\arena.h
+1677099214 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\arena.h
 

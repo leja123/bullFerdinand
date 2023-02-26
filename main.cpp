@@ -158,20 +158,20 @@ SDL_Surface* loadSurface( std::string path )
     SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
     if( loadedSurface == NULL )
     {
-        printf( "Unable to load image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+        cout<<"Unable to load image %s! SDL Error: \n"<<path.c_str()<<SDL_GetError();
     }
 
     return loadedSurface;
 }
 
 
-
 int main( int argc, char* args[] )
 {
     srand(time(NULL));
     Player x;
-    Arena y;
+    Arena y[5];
     Enemy z[3];
+
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -249,18 +249,21 @@ int main( int argc, char* args[] )
 			//render background
 			SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
 
+
 			//renders arenas if player is less than 100px away
-			if(x.xPlayer<y.xArena+400 && x.xPlayer>y.xArena-100 && x.yPlayer<y.yArena+300 && x.yPlayer>y.yArena-100 ){
+			for(int i=0; i<5; i++){
+                if(x.xPlayer<y[i].xArena+400 && x.xPlayer>y[i].xArena-100 && x.yPlayer<y[i].yArena+300 && x.yPlayer>y[i].yArena-100 ){
                 SDL_Rect destA;
-                destA.x = y.xArena;
-                destA.y = y.yArena;
+                destA.x = y[i].xArena;
+                destA.y = y[i].yArena;
                 destA.w = 300;
                 destA.h = 200;
                 SDL_BlitScaled( gArena, NULL, gScreenSurface, &destA );
-
+                }
 			}
 
-            //render player on radnom location
+
+            //render player on random location
             SDL_Rect dest;
             dest.x = x.xPlayer;
             dest.y = x.yPlayer;
@@ -276,8 +279,6 @@ int main( int argc, char* args[] )
                 destE.h = 60;
                 SDL_BlitScaled( gEnemy, NULL, gScreenSurface, &destE );
             }
-
-
 
 		}
 	}
