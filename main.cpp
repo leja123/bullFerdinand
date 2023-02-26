@@ -3,6 +3,7 @@
 #include <ctime>
 #include "player.h"
 #include "arena.h"
+#include "enemy.h"
 
 using namespace std;
 
@@ -165,6 +166,9 @@ SDL_Surface* loadSurface( std::string path )
 }
 
 
+
+
+
 int main( int argc, char* args[] )
 {
     srand(time(NULL));
@@ -210,6 +214,7 @@ int main( int argc, char* args[] )
                     //User presses a key
                     else if( e.type == SDL_KEYDOWN )
                     {
+
                         //Select surfaces based on key press
                         switch( e.key.keysym.sym )
                         {
@@ -279,6 +284,17 @@ int main( int argc, char* args[] )
                 destE.h = 60;
                 SDL_BlitScaled( gEnemy, NULL, gScreenSurface, &destE );
             }
+
+            if(z[1].xEnemy>x.xPlayer)
+                z[1].xEnemy--;
+            else
+                z[1].xEnemy++;
+            if(z[1].yEnemy>x.yPlayer)
+                z[1].yEnemy--;
+            else
+                z[1].yEnemy++;
+
+
 
 		}
 	}

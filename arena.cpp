@@ -10,7 +10,3 @@ Arena::Arena(){
 
 }
 
-Enemy::Enemy(){
-    xEnemy=rand()%(1220-0)+0;
-    yEnemy=rand()%(660-0)+0;
-}

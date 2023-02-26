@@ -15,4 +15,12 @@ class Player {
     void offScreen();
 };
 
+class Enemy : public Player{
+  public:
+    int xEnemy;
+    int yEnemy;
+    Enemy();
+
+};
+
 #endif // PLAYER_H
