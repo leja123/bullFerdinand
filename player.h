@@ -17,8 +17,8 @@ class Player {
 
 class Enemy : public Player{
   public:
-    int xEnemy;
-    int yEnemy;
+    float xEnemy;
+    float yEnemy;
     int enemyLife;
     Enemy();
 

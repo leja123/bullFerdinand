@@ -275,6 +275,7 @@ int main( int argc, char* args[] )
             dest.h = 60;
             SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &dest );
 
+            bool col=false;
             //render enemies
             for(int i=0; i<3; i++){
                 SDL_Rect destE;
@@ -284,21 +285,40 @@ int main( int argc, char* args[] )
                 destE.h = 60;
                 SDL_BlitScaled( gEnemy, NULL, gScreenSurface, &destE );
                 //chases player if less than 200px away
+
+                //collsiion
+                int A1=x.xPlayer;
+                int B1=x.xPlayer+60;
+                int C1=x.yPlayer;
+                int D1=x.yPlayer+60;
+
+                int A2=z[i].xEnemy;
+                int B2=z[i].xEnemy+60;
+                int C2=z[i].yEnemy;
+                int D2=z[i].yEnemy+60;
+
+                if(D1<=C2)
+                    col=true;
+                if(C1>=D2)
+                    col=true;
+                if(B1<=A2)
+                    col=true;
+                if(A1>=B2)
+                    col=true;
+
+
                 if(x.xPlayer<z[i].xEnemy+200 && x.xPlayer>z[i].xEnemy-200 && x.yPlayer<z[i].yEnemy+200 && x.yPlayer>z[i].yEnemy-200){
-                    if(z[i].xEnemy>x.xPlayer)
-                        z[i].xEnemy--;
-                    else
-                        z[i].xEnemy++;
-                    if(z[i].yEnemy>x.yPlayer)
-                        z[i].yEnemy--;
-                    else
-                        z[i].yEnemy++;
+                    if((z[i].xEnemy>x.xPlayer)&&col)
+                            z[i].xEnemy-=0.5;
+                    else if(col)
+                        z[i].xEnemy+=0.5;
+                    if((z[i].yEnemy>x.yPlayer)&&col)
+                        z[i].yEnemy-=0.5;
+                    else if(col)
+                        z[i].yEnemy+=0.5;
                 }
 
             }
-
-
-
 
 
 		}
