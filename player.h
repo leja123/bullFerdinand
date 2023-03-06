@@ -13,6 +13,7 @@ class Player {
     void renderPlayer();
     void test();
     void offScreen();
+
 };
 
 class Enemy : public Player{
@@ -21,7 +22,7 @@ class Enemy : public Player{
     float yEnemy;
     int enemyLife;
     Enemy();
-
+    bool collision();
 };
 
 #endif // PLAYER_H

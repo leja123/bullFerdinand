@@ -287,16 +287,17 @@ int main( int argc, char* args[] )
                 //chases player if less than 200px away
 
                 //collsiion
-                int A1=x.xPlayer;
-                int B1=x.xPlayer+60;
-                int C1=x.yPlayer;
-                int D1=x.yPlayer+60;
+                int A2=x.xPlayer;
+                int B2=x.xPlayer+60;
+                int C2=x.yPlayer;
+                int D2=x.yPlayer+60;
 
-                int A2=z[i].xEnemy;
-                int B2=z[i].xEnemy+60;
-                int C2=z[i].yEnemy;
-                int D2=z[i].yEnemy+60;
+                int A1=z[i].xEnemy;
+                int B1=z[i].xEnemy+60;
+                int C1=z[i].yEnemy;
+                int D1=z[i].yEnemy+60;
 
+                if(x.xPlayer<z[i].xEnemy+200 && x.xPlayer>z[i].xEnemy-200 && x.yPlayer<z[i].yEnemy+200 && x.yPlayer>z[i].yEnemy-200){
                 if(D1<=C2)
                     col=true;
                 if(C1>=D2)
@@ -305,21 +306,24 @@ int main( int argc, char* args[] )
                     col=true;
                 if(A1>=B2)
                     col=true;
+                }
 
 
-                if(x.xPlayer<z[i].xEnemy+200 && x.xPlayer>z[i].xEnemy-200 && x.yPlayer<z[i].yEnemy+200 && x.yPlayer>z[i].yEnemy-200){
-                    if((z[i].xEnemy>x.xPlayer)&&col)
-                            z[i].xEnemy-=0.5;
-                    else if(col)
+
+
+                if(z[i].xEnemy+200 && x.xPlayer>z[i].xEnemy-200 && x.yPlayer<z[i].yEnemy+200 && x.yPlayer>z[i].yEnemy-200 && col){
+                    if(z[i].xEnemy>x.xPlayer)
+                        z[i].xEnemy-=0.5;
+                    else
                         z[i].xEnemy+=0.5;
-                    if((z[i].yEnemy>x.yPlayer)&&col)
+                    if(z[i].yEnemy>x.yPlayer)
                         z[i].yEnemy-=0.5;
-                    else if(col)
+                    else
                         z[i].yEnemy+=0.5;
                 }
 
-            }
 
+            }
 
 		}
 	}
