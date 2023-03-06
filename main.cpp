@@ -17,7 +17,8 @@ enum KeyPressSurfaces
     KEY_PRESS_SURFACE_DOWN,
     KEY_PRESS_SURFACE_LEFT,
     KEY_PRESS_SURFACE_RIGHT,
-    KEY_PRESS_SURFACE_TOTAL
+    KEY_PRESS_SURFACE_TOTAL,
+    KEY_PRESS_SURFACE_SPACE
 };
 
 //Starts up SDL and creates window
@@ -43,6 +44,8 @@ SDL_Surface* gKeyPressSurfaces[ KEY_PRESS_SURFACE_TOTAL ];
 
 //Current displayed image
 SDL_Surface *gPlayer = NULL;
+
+SDL_Surface *gBullet = NULL;
 
 SDL_Surface *gArena = NULL;
 
@@ -96,6 +99,8 @@ bool loadMedia()
 
     gEnemy=SDL_LoadBMP("enemy.bmp");
 
+    //gBullet=SDL_LoadBMP("bullet.bmp");
+
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = loadSurface( "default.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == NULL )
     {
@@ -132,6 +137,13 @@ bool loadMedia()
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ] == NULL )
     {
         cout<<"Failed to load right image!\n";
+        success = false;
+    }
+
+    gKeyPressSurfaces[ KEY_PRESS_SURFACE_SPACE ] = loadSurface( "bullet.bmp" );
+    if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_SPACE ] == NULL )
+    {
+        cout<<"Failed to load default image!\n";
         success = false;
     }
 
@@ -174,6 +186,7 @@ int main( int argc, char* args[] )
     Player x;
     Arena y[5];
     Enemy z[3];
+    Bullet w[5];
 
 	//Start up SDL and create window
 	if( !init() )
@@ -246,6 +259,22 @@ int main( int argc, char* args[] )
                                 x.offScreen();
                                 break;
                         }
+                        if(e.key.keysym.sym==SDLK_SPACE)
+                            for(int i=0; i<5; i++){
+                                if(e.key.keysym.sym==SDLK_SPACE){
+                                SDL_Rect destB;
+                                destB.x = w[i].xBullet;
+                                destB.y = w[i].yBullet;
+                                destB.w = 60;
+                                destB.h = 60;
+                                SDL_BlitScaled( gBullet, NULL, gScreenSurface, &destB );
+
+                                }
+                                while(w[i].xBullet<=SCREEN_WIDTH){
+                                    w[i].xBullet++;
+                                }
+                            }
+
                     }
                 }
                 //Update the surface
@@ -274,6 +303,20 @@ int main( int argc, char* args[] )
             dest.w = 60;
             dest.h = 60;
             SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &dest );
+
+            for(int i=0; i<5; i++){
+                if(e.key.keysym.sym==SDLK_SPACE){
+                SDL_Rect destB;
+                destB.x = w[i].xBullet;
+                destB.y = w[i].yBullet;
+                destB.w = 60;
+                destB.h = 60;
+                SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &destB );
+                }
+            }
+
+
+
 
             bool col=false;
             //render enemies

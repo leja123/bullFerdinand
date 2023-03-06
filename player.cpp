@@ -58,6 +58,11 @@ Enemy::Enemy(){
     enemyLife=3;
 }
 
+Bullet::Bullet(){
+    xBullet=xPlayer;
+    yBullet=yPlayer;
+}
+
 
 
 

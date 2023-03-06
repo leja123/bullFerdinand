@@ -25,4 +25,11 @@ class Enemy : public Player{
     bool collision();
 };
 
+class Bullet : public Player{
+  public:
+    int xBullet;
+    int yBullet;
+    Bullet();
+};
+
 #endif // PLAYER_H
