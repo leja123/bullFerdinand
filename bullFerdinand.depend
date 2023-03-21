@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1678117018 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
+1679424522 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
 	<SDL.h>
 	<iostream>
 	<ctime>
 	"player.h"
 	"arena.h"
+	"game.h"
 
 1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -388,19 +389,21 @@
 	<SDL.h>
 	<iostream>
 
-1676064127 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
-	<SDL.h>
+1679424548 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
+
+1679424581 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
 	<iostream>
+	"game.h"
+	"player.h"
+	"arena.h"
+	<SDL.h>
+	<ctime>
 
-1676064285 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
-	"Game.h"
-	"SDL.h"
-
-1678116119 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.h
+1678977671 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.h
 	<iostream>
 	<SDL.h>
 
-1678115856 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
+1678977626 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
 	<iostream>
 	"player.h"
 

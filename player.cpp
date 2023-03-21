@@ -26,7 +26,7 @@ void Player::offScreen(){
         yPlayer=660;
 }
 
-bool Enemy::collision(){
+/*bool Enemy::collision(){
     int A1=xPlayer;
     int B1=xPlayer+60;
     int C1=yPlayer;
@@ -51,17 +51,17 @@ bool Enemy::collision(){
     else
         return false;
 }
-
+*/
 Enemy::Enemy(){
     xEnemy=rand()%(1220-0)+0;
     yEnemy=rand()%(660-0)+0;
     enemyLife=3;
 }
 
-Bullet::Bullet(){
+/*Bullet::Bullet(){
     xBullet=xPlayer;
     yBullet=yPlayer;
-}
+}*/
 
 
 
