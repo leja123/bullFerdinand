@@ -56,7 +56,13 @@ SDL_Surface* loadSurface( std::string path )
 
 
 Game::Game(){
-    srand(time(NULL));
+    }
+
+/*Game::~Game(){
+
+}*/
+void Game::run_game(){
+srand(time(NULL));
     Player x;
     Arena y[5];
     Enemy z[2];
@@ -259,11 +265,8 @@ Game::Game(){
 
 	//Free resources and close SDL
 	close();
-}}
-
-/*Game::~Game(){
-
-}*/
+}
+}
 
 bool Game::init(){
     //Initialization flag

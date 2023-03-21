@@ -9,7 +9,7 @@
 using namespace std;
 
 
-
+Game *game = nullptr;
 
 /*
 //Starts up SDL and creates window
@@ -24,7 +24,8 @@ void close();
 
 int main( int argc, char* args[] )
 {
-   Game a;
+   game = new Game();
+   game->run_game();
 
 	return 0;
 }
