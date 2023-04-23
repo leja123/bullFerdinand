@@ -17,8 +17,9 @@ enum KeyPressSurfaces
     KEY_PRESS_SURFACE_DOWN,
     KEY_PRESS_SURFACE_LEFT,
     KEY_PRESS_SURFACE_RIGHT,
-    KEY_PRESS_SURFACE_TOTAL,
-    KEY_PRESS_SURFACE_SPACE
+    KEY_PRESS_SURFACE_SPACE,
+    KEY_PRESS_SURFACE_TOTAL
+
 };
 
 SDL_Surface* loadSurface( std::string path );
@@ -36,7 +37,7 @@ SDL_Surface* gKeyPressSurfaces[ KEY_PRESS_SURFACE_TOTAL ];
 //Current displayed image
 SDL_Surface *gPlayer = NULL;
 
-//SDL_Surface *gBullet = NULL;
+SDL_Surface *gBullet = NULL;
 
 SDL_Surface *gArena = NULL;
 
@@ -66,7 +67,9 @@ srand(time(NULL));
     Player x;
     Arena y[5];
     Enemy z[2];
-//    Bullet w[5];
+    Bullet w[5];
+
+    bool bulletShow=false;
 
 	//Start up SDL and create window
 	if( !init() )
@@ -133,6 +136,20 @@ srand(time(NULL));
                                 x.xPlayer+=10;
                                 x.offScreen();
                                 break;
+                            case SDLK_SPACE:
+                                bulletShow=true;
+                                //bullet goes towards enemy
+                                if(w[1].xBullet>z[1].xEnemy)
+                                    w[1].xBullet--;
+                                else
+                                    w[1].xBullet++;
+                                if(w[1].yBullet>z[1].yEnemy)
+                                    w[1].yBullet--;
+                                else
+                                    w[1].xBullet++;
+
+
+                                break;
 
                             default:
                                 gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
@@ -175,6 +192,15 @@ srand(time(NULL));
                 }
 			}
 
+			//render bullet
+			if(bulletShow){
+                SDL_Rect destB;
+                destB.x = w[1].xBullet;
+                destB.y = w[1].yBullet;
+                destB.w = 60;
+                destB.h = 60;
+                SDL_BlitScaled( gBullet, NULL, gScreenSurface, &destB );
+			}
 
             //render player on random location
             SDL_Rect dest;
@@ -184,7 +210,7 @@ srand(time(NULL));
             dest.h = 60;
             SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &dest );
 
-           /* for(int i=0; i<5; i++){
+            /*for(int i=0; i<5; i++){
                 if(e.key.keysym.sym==SDLK_SPACE){
                 SDL_Rect destB;
                 destB.x = w[i].xBullet;
@@ -193,9 +219,8 @@ srand(time(NULL));
                 destB.h = 60;
                 SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &destB );
                 }
-            }
+            }*/
 
-*/
 
 
             bool col=false;
@@ -243,8 +268,8 @@ srand(time(NULL));
                         else
                             colEnemy=false;
                     }
-                }
-            */
+                }*/
+
 
                 if(z[i].xEnemy+200 && x.xPlayer>z[i].xEnemy-200 && x.yPlayer<z[i].yEnemy+200 && x.yPlayer>z[i].yEnemy-200 && col ){ //!colEnemy
                     if(z[i].xEnemy>x.xPlayer)
@@ -315,7 +340,7 @@ bool Game::loadMedia()
 
     gEnemy=SDL_LoadBMP("enemy.bmp");
 
-    //gBullet=SDL_LoadBMP("bullet.bmp");
+    gBullet=SDL_LoadBMP("bullet.bmp");
 
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = loadSurface( "default.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == NULL )
@@ -356,12 +381,12 @@ bool Game::loadMedia()
         success = false;
     }
 
-    /*gKeyPressSurfaces[ KEY_PRESS_SURFACE_SPACE ] = loadSurface( "bullet.bmp" );
+    gKeyPressSurfaces[ KEY_PRESS_SURFACE_SPACE ] = loadSurface( "bullet.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_SPACE ] == NULL )
     {
         cout<<"Failed to load default image!\n";
         success = false;
-    }*/
+    }
 
 	return success;
 }

@@ -42,6 +42,8 @@
 		<Unit filename="bullFerdinand.cbp" />
 		<Unit filename="bullFerdinand.depend" />
 		<Unit filename="bullFerdinand.layout" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="player.cpp" />
 		<Unit filename="player.h" />

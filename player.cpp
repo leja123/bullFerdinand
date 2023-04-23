@@ -58,10 +58,10 @@ Enemy::Enemy(){
     enemyLife=3;
 }
 
-/*Bullet::Bullet(){
+Bullet::Bullet(){
     xBullet=xPlayer;
     yBullet=yPlayer;
-}*/
+}
 
 
 

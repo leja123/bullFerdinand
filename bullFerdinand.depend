@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1679424737 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
+1679429074 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
 	<SDL.h>
 	<iostream>
 	<ctime>
@@ -7,7 +7,7 @@
 	"arena.h"
 	"game.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -44,12 +44,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_main.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -78,28 +78,28 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_config.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 	<winsdkver.h>
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_platform.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\begin_code.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\begin_code.h
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\close_code.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\close_code.h
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_assert.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
@@ -107,7 +107,7 @@
 	<mbarrier.h>
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_audio.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -117,12 +117,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_error.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_endian.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<endian.h>
@@ -131,13 +131,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_thread.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -148,18 +148,18 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -179,7 +179,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_events.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -193,7 +193,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_video.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -201,13 +201,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_rect.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -215,7 +215,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_surface.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -224,11 +224,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -236,27 +236,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -265,17 +265,17 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_sensor.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_sensor.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_quit.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -283,70 +283,70 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_touch.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_hidapi.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_hidapi.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_hints.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_log.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_metal.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_metal.h
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_power.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_render.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_shape.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_shape.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -355,7 +355,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_system.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -363,24 +363,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_timer.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_version.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906719 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_locale.h
+1650910319 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_locale.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1650906720 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_misc.h
+1650910320 c:\users\hp\desktop\leja\programiranje\sdl2\sdl2-devel-2.0.22-mingw\sdl2-2.0.22\i686-w64-mingw32\include\sdl2\sdl_misc.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
@@ -389,10 +389,10 @@
 	<SDL.h>
 	<iostream>
 
-1679425337 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
+1679431286 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
 	"player.h"
 
-1679425330 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
+1682276252 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
 	<iostream>
 	"game.h"
 	"player.h"
@@ -400,19 +400,19 @@
 	<SDL.h>
 	<ctime>
 
-1678977671 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.h
+1682276283 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.h
 	<iostream>
 	<SDL.h>
 
-1678977626 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
+1682276305 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
 	<iostream>
 	"player.h"
 
-1677788666 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\arena.cpp
+1677792266 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\arena.cpp
 	<iostream>
 	"arena.h"
 
-1677788650 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\arena.h
+1677792250 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\arena.h
 
 1677442672 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\enemy.cpp
 	<iostream>

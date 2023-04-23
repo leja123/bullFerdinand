@@ -10,8 +10,6 @@ class Game{
     void run_game();
     bool loadMedia();
     void close();
-
-
 };
 
 #endif // GAME_H_INCLUDED
