@@ -56,6 +56,7 @@ SDL_Surface* loadSurface( std::string path )
 }
 
 
+
 Game::Game(){
     }
 
@@ -68,6 +69,7 @@ srand(time(NULL));
     Arena y[5];
     Enemy z[2];
     Bullet w[5];
+
 
     bool bulletShow=false;
 
@@ -139,14 +141,27 @@ srand(time(NULL));
                             case SDLK_SPACE:
                                 bulletShow=true;
                                 //bullet goes towards enemy
-                                if(w[1].xBullet>z[1].xEnemy)
-                                    w[1].xBullet--;
-                                else
-                                    w[1].xBullet++;
-                                if(w[1].yBullet>z[1].yEnemy)
-                                    w[1].yBullet--;
-                                else
-                                    w[1].xBullet++;
+                                for(int i=0; i<10; i++){
+                                    if(w[1].xBullet>z[1].xEnemy)
+                                        w[1].xBullet--;
+                                    else
+                                        w[1].xBullet++;
+                                    if(w[1].yBullet>z[1].yEnemy)
+                                        w[1].yBullet--;
+                                    else
+                                        w[1].yBullet++;
+
+                                        if(bulletShow){
+                                            SDL_Rect destB;
+                                            destB.x = w[1].xBullet;
+                                            destB.y = w[1].yBullet;
+                                            destB.w = 60;
+                                            destB.h = 60;
+                                            SDL_BlitScaled( gBullet, NULL, gScreenSurface, &destB );
+                                        }
+                                }
+
+
 
 
                                 break;
