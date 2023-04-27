@@ -7,6 +7,7 @@ class Game{
     Game();
     ~Game(){};
     bool init();
+    void menu();
     void run_game();
     bool loadMedia();
     void close();

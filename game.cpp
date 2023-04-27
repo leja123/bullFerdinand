@@ -30,6 +30,8 @@ SDL_Window *gWindow = NULL;
 SDL_Surface *gScreenSurface = NULL;
 
 //background image
+SDL_Surface *gMenuBackground = NULL;
+
 SDL_Surface *gBackground = NULL;
 
 SDL_Surface* gKeyPressSurfaces[ KEY_PRESS_SURFACE_TOTAL ];
@@ -58,7 +60,38 @@ SDL_Surface* loadSurface( std::string path )
 
 
 Game::Game(){
-    }
+}
+
+void Game::menu(){
+    if( !init() )
+	{
+		cout<<"Failed to initialize!\n";
+	}
+	else
+	{
+		//Load media
+		if( !loadMedia() )
+		{
+			cout<<"Failed to load media!\n";
+		}
+		else
+		{
+		    while(true){
+                SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
+
+            SDL_UpdateWindowSurface( gWindow );
+		    }
+
+
+
+
+
+
+		}
+		close();
+	}
+
+}
 
 /*Game::~Game(){
 
@@ -350,6 +383,12 @@ bool Game::loadMedia()
 		success = false;
 	}
 
+	gMenuBackground = SDL_LoadBMP( "menubg.bmp" );
+	if( gMenuBackground == NULL )
+	{
+		cout<<"Unable to load image %s! SDL Error: \n"<< "bg.bmp"<< SDL_GetError();
+		success = false;
+	}
 
     gArena=SDL_LoadBMP("arena.bmp");
 
@@ -408,6 +447,8 @@ bool Game::loadMedia()
 
 void Game::close()
 {
+    SDL_FreeSurface( gMenuBackground );
+	gBackground = NULL;
 	//Deallocate surface
 	SDL_FreeSurface( gBackground );
 	gBackground = NULL;
