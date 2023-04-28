@@ -10,6 +10,7 @@ class Game{
     void menu();
     void run_game();
     void pause();
+    void hidePauseScreen();
     bool loadMedia();
     void close();
 };

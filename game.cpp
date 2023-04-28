@@ -104,7 +104,7 @@ void Game::pause(){
                         switch( e.key.keysym.sym )
                         {
                             case SDLK_ESCAPE:
-                                run_game();
+                                hidePauseScreen();
                                 break;
                         }
                     }
@@ -533,6 +533,19 @@ void Game::close()
 
 	//Quit SDL subsystems
 	SDL_Quit();
+}
+
+void Game::hidePauseScreen()
+{
+    SDL_FreeSurface( gPause );
+	gPause = NULL;
+
+	//Destroy window
+	SDL_DestroyWindow( gWindow );
+	gWindow = NULL;
+
+	//Quit SDL subsystems
+
 }
 
 

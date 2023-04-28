@@ -389,10 +389,10 @@
 	<SDL.h>
 	<iostream>
 
-1682711438 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
+1682712432 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
 	"player.h"
 
-1682711434 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
+1682712176 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
 	<iostream>
 	"game.h"
 	"player.h"
