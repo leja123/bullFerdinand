@@ -18,9 +18,11 @@ enum KeyPressSurfaces
     KEY_PRESS_SURFACE_LEFT,
     KEY_PRESS_SURFACE_RIGHT,
     KEY_PRESS_SURFACE_SPACE,
+    KEY_PRESS_SURFACE_ESCAPE,
     KEY_PRESS_SURFACE_TOTAL
 
 };
+
 
 SDL_Surface* loadSurface( std::string path );
 //The window we'll be rendering to
@@ -33,6 +35,8 @@ SDL_Surface *gScreenSurface = NULL;
 SDL_Surface *gMenuBackground = NULL;
 
 SDL_Surface *gBackground = NULL;
+
+SDL_Surface *gPause = NULL;
 
 SDL_Surface* gKeyPressSurfaces[ KEY_PRESS_SURFACE_TOTAL ];
 
@@ -60,6 +64,60 @@ SDL_Surface* loadSurface( std::string path )
 
 
 Game::Game(){
+
+}
+
+void Game::pause(){
+    if( !init() )
+        {
+            cout<<"Failed to initialize!\n";
+        }
+        else
+        {
+            //Load media
+            if( !loadMedia() )
+            {
+                cout<<"Failed to load media!\n";
+            }
+            else
+            {
+
+            while(1){
+                SDL_BlitSurface( gPause, NULL, gScreenSurface, NULL );
+                bool quit=false;
+                SDL_Event e;
+                while( !quit )
+            {
+                //Handle events on queue
+                while( SDL_PollEvent( &e ) != 0 )
+                {
+                    //User requests quit
+                    if( e.type == SDL_QUIT )
+                    {
+                        quit = true;
+                    }
+                    //User presses a key
+                    else if( e.type == SDL_KEYDOWN )
+                    {
+
+                        //Select surfaces based on key press
+                        switch( e.key.keysym.sym )
+                        {
+                            case SDLK_ESCAPE:
+                                run_game();
+                                break;
+                        }
+                    }
+                }
+            }
+
+
+                SDL_UpdateWindowSurface( gWindow );
+            }
+
+            }
+            close();
+        }
 }
 
 void Game::menu(){
@@ -76,11 +134,14 @@ void Game::menu(){
 		}
 		else
 		{
-		    while(true){
-                SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
+        bool closewindow=false;
+        while(!closewindow){
+            SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
 
             SDL_UpdateWindowSurface( gWindow );
-		    }
+        }
+
+
 
 
 
@@ -173,6 +234,9 @@ srand(time(NULL));
                                 break;
                             case SDLK_SPACE:
                                 bulletShow=true;
+
+                                cout<<"kordinate bulleta: "<<w[1].xBullet<<" "<<w[1].yBullet<<endl;
+                                cout<<"Koordinate playerja: "<<x.xPlayer<<" "<<x.yPlayer<<endl;
                                 //bullet goes towards enemy
                                 for(int i=0; i<10; i++){
                                     if(w[1].xBullet>z[1].xEnemy)
@@ -183,6 +247,7 @@ srand(time(NULL));
                                         w[1].yBullet--;
                                     else
                                         w[1].yBullet++;
+
 
                                         if(bulletShow){
                                             SDL_Rect destB;
@@ -198,7 +263,9 @@ srand(time(NULL));
 
 
                                 break;
-
+                            case SDLK_ESCAPE:
+                                pause();
+                                break;
                             default:
                                 gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
                                 x.offScreen();
@@ -386,7 +453,14 @@ bool Game::loadMedia()
 	gMenuBackground = SDL_LoadBMP( "menubg.bmp" );
 	if( gMenuBackground == NULL )
 	{
-		cout<<"Unable to load image %s! SDL Error: \n"<< "bg.bmp"<< SDL_GetError();
+		cout<<"Unable to load image %s! SDL Error: \n"<< "menubg.bmp"<< SDL_GetError();
+		success = false;
+	}
+
+	gPause = SDL_LoadBMP( "pause.bmp" );
+	if( gPause == NULL )
+	{
+		cout<<"Unable to load image %s! SDL Error: \n"<< "pause.bmp"<< SDL_GetError();
 		success = false;
 	}
 

@@ -25,7 +25,8 @@ void close();
 int main( int argc, char* args[] )
 {
    game = new Game();
-   //game->run_game();
-   game->menu();
+   game->run_game();
+   //game->menu();
+    //game->pause();
 	return 0;
 }

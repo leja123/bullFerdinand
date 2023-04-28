@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1682598593 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
+1682711479 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\main.cpp
 	<SDL.h>
 	<iostream>
 	<ctime>
@@ -389,10 +389,10 @@
 	<SDL.h>
 	<iostream>
 
-1682598576 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
+1682711438 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
 	"player.h"
 
-1682599411 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
+1682711434 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
 	<iostream>
 	"game.h"
 	"player.h"
@@ -400,7 +400,7 @@
 	<SDL.h>
 	<ctime>
 
-1682278678 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.h
+1682683564 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.h
 	<iostream>
 	<SDL.h>
 

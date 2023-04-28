@@ -9,6 +9,7 @@ class Game{
     bool init();
     void menu();
     void run_game();
+    void pause();
     bool loadMedia();
     void close();
 };
