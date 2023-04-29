@@ -275,8 +275,12 @@ srand(time(NULL));
                                             SDL_BlitScaled( gBullet, NULL, gScreenSurface, &destB );
                                         }
                                 }
-
-                                if(bullet->xBullet==enemy->xEnemy && bullet->yBullet==enemy->yEnemy){
+                                cout<<"Enemy life: "<<enemy->enemyLife<<endl;
+                                if(//bullet->xBullet==enemy->xEnemy && bullet->yBullet==enemy->yEnemy
+                                   bullet->xBullet<enemy->xEnemy+60 && bullet->xBullet>enemy->xEnemy-60 && bullet->yBullet<enemy->yEnemy+60 && bullet->yBullet>enemy->yEnemy-60){
+                                    enemy->enemyLife-=25;
+                                    if(enemy->enemyLife==0)
+                                        cout<<endl<<"dead"<<endl;
                                     delete bullet;
                                     firstShoot=true;
                                     break;
