@@ -11,5 +11,8 @@ Arena::Arena(){
 }
 
 ArenaEnemy::ArenaEnemy(){
+    arenaEnemyLife=100;
+    xArenaEnemy=xArena+rand()%10+0;
+    yArenaEnemy=yArena+rand()%10+0;
 }
 

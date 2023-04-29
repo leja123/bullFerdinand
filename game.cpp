@@ -172,6 +172,11 @@ void Game::run_game(){
 srand(time(NULL));
     Player x;
     int killCount=0;
+    int arenaCount=0;
+    int arenaEnemyKillCount=0;
+    int level=1;
+    bool showArena=false;
+    bool battleBegin=false;
     enemy = new Enemy();
     arena = new Arena();
     arenaEnemy = new ArenaEnemy();
@@ -255,11 +260,26 @@ srand(time(NULL));
                                     bullet->yBullet=x.yPlayer;
                                     firstShoot=false;
                                 }
-                                cout<<"kordinate bulleta: "<<bullet->xBullet<<" "<<bullet->yBullet<<endl;
-                                cout<<"Koordinate playerja: "<<x.xPlayer<<" "<<x.yPlayer<<endl;
+                               /* cout<<"kordinate bulleta: "<<bullet->xBullet<<" "<<bullet->yBullet<<endl;
+                                cout<<"Koordinate playerja: "<<x.xPlayer<<" "<<x.yPlayer<<endl;*/
                                 //bullet goes towards enemy
 
-                                for(int i=0; i<50; i++){
+
+                                if(battleBegin){
+                                    //if(((arenaEnemy->xArenaEnemy-x.xPlayer) && (arenaEnemy->yArenaEnemy-x.yPlayer)) > ((enemy->xEnemy-x.xPlayer)&&(enemy->yEnemy-x.yPlayer))){
+                                        for(int i=0; i<50; i++){
+                                            if(bullet->xBullet>arenaEnemy->xArenaEnemy)
+                                                bullet->xBullet--;
+                                            else
+                                                bullet->xBullet++;
+                                            if(bullet->yBullet>arenaEnemy->yArenaEnemy)
+                                                bullet->yBullet--;
+                                            else
+                                                bullet->yBullet++;
+                                            }
+                                }
+                                else{
+                                    for(int i=0; i<50; i++){
                                     if(bullet->xBullet>enemy->xEnemy)
                                         bullet->xBullet--;
                                     else
@@ -268,6 +288,10 @@ srand(time(NULL));
                                         bullet->yBullet--;
                                     else
                                         bullet->yBullet++;
+                                    }
+
+
+
 
 
                                         if(bulletShow){
@@ -280,6 +304,36 @@ srand(time(NULL));
                                         }
                                 }
                                 cout<<"Enemy life: "<<enemy->enemyLife<<endl;
+
+                                if(battleBegin){
+                                    if(bullet->xBullet<arenaEnemy->xArenaEnemy+60 && bullet->xBullet>arenaEnemy->xArenaEnemy-60 && bullet->yBullet<arenaEnemy->yArenaEnemy+60 && bullet->yBullet>arenaEnemy->yArenaEnemy-60){
+                                        arenaEnemy->arenaEnemyLife-=25;
+                                        if(arenaEnemy->arenaEnemyLife==0){
+                                            arenaEnemyKillCount++;
+                                            cout<<"Arena enemy kill count: "<<arenaEnemyKillCount;
+                                            cout<<endl<<"dead"<<endl;
+                                            delete arenaEnemy;
+                                            if(arenaEnemyKillCount<3){
+                                                arenaEnemy = new ArenaEnemy();
+                                            }
+                                            else{
+                                                delete arena;
+                                                arenaCount++;
+                                                if(arenaCount<5){
+                                                    arena = new Arena();
+                                                }
+                                                else
+                                                    level++;
+                                                break;
+                                        }
+
+                                    }
+                                    delete bullet;
+                                    firstShoot=true;
+                                    bulletShow=false;
+                                    break;
+                                    }
+                                }
                                 if(bullet->xBullet<enemy->xEnemy+60 && bullet->xBullet>enemy->xEnemy-60 && bullet->yBullet<enemy->yEnemy+60 && bullet->yBullet>enemy->yEnemy-60){
                                     enemy->enemyLife-=25;
                                     if(enemy->enemyLife==0){
@@ -291,6 +345,7 @@ srand(time(NULL));
                                     }
                                     delete bullet;
                                     firstShoot=true;
+                                    bulletShow=false;
                                     break;
 
                                 }
@@ -330,7 +385,12 @@ srand(time(NULL));
 
 
 			//renders arenas if player is less than 100px away
-            if(x.xPlayer<arena->xArena+400 && x.xPlayer>arena->xArena-100 && x.yPlayer<arena->yArena+300 && x.yPlayer>arena->yArena-100 ){
+            if(x.xPlayer<arena->xArena+400 && x.xPlayer>arena->xArena-100 && x.yPlayer<arena->yArena+300 && x.yPlayer>arena->yArena-10){
+                showArena=true;
+                battleBegin=true;
+            }
+
+            if(showArena){
                 SDL_Rect destA;
                 destA.x = arena->xArena;
                 destA.y = arena->yArena;
@@ -338,13 +398,20 @@ srand(time(NULL));
                 destA.h = 200;
                 SDL_BlitScaled( gArena, NULL, gScreenSurface, &destA );
 			}
-			//render enemies in arena
-			SDL_Rect destAE;
-            destAE.x = arenaEnemy->xArenaEnemy;
-            destAE.y = arenaEnemy->yArenaEnemy;
-            destAE.w = 60;
-            destAE.h = 60;
-            SDL_BlitScaled( gArenaEnemy, NULL, gScreenSurface, &destAE );
+
+			if(battleBegin){
+                //render enemies in arena
+                SDL_Rect destAE;
+                destAE.x = arenaEnemy->xArenaEnemy;
+                destAE.y = arenaEnemy->yArenaEnemy;
+                destAE.w = 60;
+                destAE.h = 60;
+                SDL_BlitScaled( gArenaEnemy, NULL, gScreenSurface, &destAE );
+
+
+            }
+
+
 
 			//render bullet
 			if(bulletShow){

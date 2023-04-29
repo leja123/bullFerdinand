@@ -10,8 +10,9 @@ class Arena {
 
 class ArenaEnemy : public Arena {
   public:
-    int xArenaEnemy=250;
-    int yArenaEnemy=250;
+    int xArenaEnemy;
+    int yArenaEnemy;
+    int arenaEnemyLife;
     ArenaEnemy();
 };
 
