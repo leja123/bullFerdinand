@@ -4,6 +4,7 @@
 #include "arena.h"
 #include <SDL.h>
 #include <ctime>
+#include <vector>
 
 using namespace std;
 
@@ -157,15 +158,23 @@ void Game::menu(){
 /*Game::~Game(){
 
 }*/
+
+Bullet *bullet = NULL;
+Arena *arena = NULL;
+Enemy *enemy = NULL;
+
 void Game::run_game(){
 srand(time(NULL));
     Player x;
-    Arena y[5];
-    Enemy z[2];
-    Bullet w[5];
-
+    bullet = new Bullet;
+    enemy = new Enemy();
+    arena = new Arena();
+    //vector <Arena> y;
+    //vector <Enemy> z;
+    //vector <Bullet> w;
 
     bool bulletShow=false;
+    bool firstShoot=true;
 
 	//Start up SDL and create window
 	if( !init() )
@@ -234,25 +243,30 @@ srand(time(NULL));
                                 break;
                             case SDLK_SPACE:
                                 bulletShow=true;
-
-                                cout<<"kordinate bulleta: "<<w[1].xBullet<<" "<<w[1].yBullet<<endl;
+                                if(firstShoot){
+                                    bullet->xBullet=x.xPlayer;
+                                    bullet->yBullet=x.yPlayer;
+                                    firstShoot=false;
+                                }
+                                cout<<"kordinate bulleta: "<<bullet->xBullet<<" "<<bullet->yBullet<<endl;
                                 cout<<"Koordinate playerja: "<<x.xPlayer<<" "<<x.yPlayer<<endl;
                                 //bullet goes towards enemy
+
                                 for(int i=0; i<10; i++){
-                                    if(w[1].xBullet>z[1].xEnemy)
-                                        w[1].xBullet--;
+                                    if(bullet->xBullet>enemy->xEnemy)
+                                        bullet->xBullet--;
                                     else
-                                        w[1].xBullet++;
-                                    if(w[1].yBullet>z[1].yEnemy)
-                                        w[1].yBullet--;
+                                        bullet->xBullet++;
+                                    if(bullet->yBullet>enemy->yEnemy)
+                                        bullet->yBullet--;
                                     else
-                                        w[1].yBullet++;
+                                        bullet->yBullet++;
 
 
                                         if(bulletShow){
                                             SDL_Rect destB;
-                                            destB.x = w[1].xBullet;
-                                            destB.y = w[1].yBullet;
+                                            destB.x = bullet->xBullet;
+                                            destB.y = bullet->yBullet;
                                             destB.w = 60;
                                             destB.h = 60;
                                             SDL_BlitScaled( gBullet, NULL, gScreenSurface, &destB );
@@ -297,10 +311,10 @@ srand(time(NULL));
 
 			//renders arenas if player is less than 100px away
 			for(int i=0; i<5; i++){
-                if(x.xPlayer<y[i].xArena+400 && x.xPlayer>y[i].xArena-100 && x.yPlayer<y[i].yArena+300 && x.yPlayer>y[i].yArena-100 ){
+                if(x.xPlayer<arena->xArena+400 && x.xPlayer>arena->xArena-100 && x.yPlayer<arena->yArena+300 && x.yPlayer>arena->yArena-100 ){
                 SDL_Rect destA;
-                destA.x = y[i].xArena;
-                destA.y = y[i].yArena;
+                destA.x = arena->xArena;
+                destA.y = arena->yArena;
                 destA.w = 300;
                 destA.h = 200;
                 SDL_BlitScaled( gArena, NULL, gScreenSurface, &destA );
@@ -310,8 +324,8 @@ srand(time(NULL));
 			//render bullet
 			if(bulletShow){
                 SDL_Rect destB;
-                destB.x = w[1].xBullet;
-                destB.y = w[1].yBullet;
+                destB.x = bullet->xBullet;
+                destB.y = bullet->yBullet;
                 destB.w = 60;
                 destB.h = 60;
                 SDL_BlitScaled( gBullet, NULL, gScreenSurface, &destB );
@@ -343,8 +357,8 @@ srand(time(NULL));
             //render enemies
             for(int i=0; i<2; i++){
                 SDL_Rect destE;
-                destE.x = z[i].xEnemy;
-                destE.y = z[i].yEnemy;
+                destE.x = enemy->xEnemy;
+                destE.y = enemy->yEnemy;
                 destE.w = 60;
                 destE.h = 60;
                 SDL_BlitScaled( gEnemy, NULL, gScreenSurface, &destE );
@@ -356,12 +370,12 @@ srand(time(NULL));
                 int C2=x.yPlayer;
                 int D2=x.yPlayer+60;
 
-                int A1=z[i].xEnemy;
-                int B1=z[i].xEnemy+60;
-                int C1=z[i].yEnemy;
-                int D1=z[i].yEnemy+60;
+                int A1=enemy->xEnemy;
+                int B1=enemy->xEnemy+60;
+                int C1=enemy->yEnemy;
+                int D1=enemy->yEnemy+60;
 
-                if(x.xPlayer<z[i].xEnemy+200 && x.xPlayer>z[i].xEnemy-200 && x.yPlayer<z[i].yEnemy+200 && x.yPlayer>z[i].yEnemy-200){
+                if(x.xPlayer<enemy->xEnemy+200 && x.xPlayer>enemy->xEnemy-200 && x.yPlayer<enemy->yEnemy+200 && x.yPlayer>enemy->yEnemy-200){
                 if(D1<=C2)
                     col=true;
                 if(C1>=D2)
@@ -386,15 +400,15 @@ srand(time(NULL));
                 }*/
 
 
-                if(z[i].xEnemy+200 && x.xPlayer>z[i].xEnemy-200 && x.yPlayer<z[i].yEnemy+200 && x.yPlayer>z[i].yEnemy-200 && col ){ //!colEnemy
-                    if(z[i].xEnemy>x.xPlayer)
-                        z[i].xEnemy-=0.5;
+                if(enemy->xEnemy+200 && x.xPlayer>enemy->xEnemy-200 && x.yPlayer<enemy->yEnemy+200 && x.yPlayer>enemy->yEnemy-200 && col ){ //!colEnemy
+                    if(enemy->xEnemy>x.xPlayer)
+                        enemy->xEnemy-=0.5;
                     else
-                        z[i].xEnemy+=0.5;
-                    if(z[i].yEnemy>x.yPlayer)
-                        z[i].yEnemy-=0.5;
+                        enemy->xEnemy+=0.5;
+                    if(enemy->yEnemy>x.yPlayer)
+                        enemy->yEnemy-=0.5;
                     else
-                        z[i].yEnemy+=0.5;
+                        enemy->yEnemy+=0.5;
                 }
 
 

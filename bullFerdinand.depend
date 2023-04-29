@@ -392,19 +392,20 @@
 1682712432 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
 	"player.h"
 
-1682712176 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
+1682767835 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
 	<iostream>
 	"game.h"
 	"player.h"
 	"arena.h"
 	<SDL.h>
 	<ctime>
+	<vector>
 
-1682683564 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.h
+1682768037 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.h
 	<iostream>
 	<SDL.h>
 
-1682278684 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
+1682768155 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
 	<iostream>
 	"player.h"
 

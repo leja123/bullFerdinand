@@ -16,7 +16,7 @@ class Player {
 
 };
 
-class Enemy : public Player{
+class Enemy{
   public:
     float xEnemy;
     float yEnemy;
