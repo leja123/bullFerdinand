@@ -50,6 +50,8 @@ SDL_Surface *gArena = NULL;
 
 SDL_Surface *gEnemy = NULL;
 
+SDL_Surface *gArenaEnemy = NULL;
+
 SDL_Surface* loadSurface( std::string path )
 {
     //Load image at specified path
@@ -164,12 +166,15 @@ void Game::menu(){
 Bullet *bullet = NULL;
 Arena *arena = NULL;
 Enemy *enemy = NULL;
+ArenaEnemy *arenaEnemy = NULL;
 
 void Game::run_game(){
 srand(time(NULL));
     Player x;
+    int killCount=0;
     enemy = new Enemy();
     arena = new Arena();
+    arenaEnemy = new ArenaEnemy();
     //vector <Arena> y;
     //vector <Enemy> z;
     //vector <Bullet> w;
@@ -278,6 +283,8 @@ srand(time(NULL));
                                 if(bullet->xBullet<enemy->xEnemy+60 && bullet->xBullet>enemy->xEnemy-60 && bullet->yBullet<enemy->yEnemy+60 && bullet->yBullet>enemy->yEnemy-60){
                                     enemy->enemyLife-=25;
                                     if(enemy->enemyLife==0){
+                                        killCount++;
+                                        cout<<"Kill count: "<<killCount;
                                         cout<<endl<<"dead"<<endl;
                                         delete enemy;
                                         enemy = new Enemy();
@@ -323,16 +330,21 @@ srand(time(NULL));
 
 
 			//renders arenas if player is less than 100px away
-			for(int i=0; i<5; i++){
-                if(x.xPlayer<arena->xArena+400 && x.xPlayer>arena->xArena-100 && x.yPlayer<arena->yArena+300 && x.yPlayer>arena->yArena-100 ){
+            if(x.xPlayer<arena->xArena+400 && x.xPlayer>arena->xArena-100 && x.yPlayer<arena->yArena+300 && x.yPlayer>arena->yArena-100 ){
                 SDL_Rect destA;
                 destA.x = arena->xArena;
                 destA.y = arena->yArena;
                 destA.w = 300;
                 destA.h = 200;
                 SDL_BlitScaled( gArena, NULL, gScreenSurface, &destA );
-                }
 			}
+			//render enemies in arena
+			SDL_Rect destAE;
+            destAE.x = arenaEnemy->xArenaEnemy;
+            destAE.y = arenaEnemy->yArenaEnemy;
+            destAE.w = 60;
+            destAE.h = 60;
+            SDL_BlitScaled( gArenaEnemy, NULL, gScreenSurface, &destAE );
 
 			//render bullet
 			if(bulletShow){
@@ -492,6 +504,8 @@ bool Game::loadMedia()
 	}
 
     gArena=SDL_LoadBMP("arena.bmp");
+
+    gArenaEnemy=SDL_LoadBMP("arenaEnemy.bmp");
 
     gEnemy=SDL_LoadBMP("enemy.bmp");
 

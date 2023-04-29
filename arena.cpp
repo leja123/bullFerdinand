@@ -10,3 +10,6 @@ Arena::Arena(){
 
 }
 
+ArenaEnemy::ArenaEnemy(){
+}
+
