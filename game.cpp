@@ -243,7 +243,6 @@ srand(time(NULL));
                                 x.offScreen();
                                 break;
                             case SDLK_SPACE:
-
                                 bulletShow=true;
                                 if(firstShoot){
                                     bullet = new Bullet;
@@ -276,11 +275,13 @@ srand(time(NULL));
                                         }
                                 }
                                 cout<<"Enemy life: "<<enemy->enemyLife<<endl;
-                                if(//bullet->xBullet==enemy->xEnemy && bullet->yBullet==enemy->yEnemy
-                                   bullet->xBullet<enemy->xEnemy+60 && bullet->xBullet>enemy->xEnemy-60 && bullet->yBullet<enemy->yEnemy+60 && bullet->yBullet>enemy->yEnemy-60){
+                                if(bullet->xBullet<enemy->xEnemy+60 && bullet->xBullet>enemy->xEnemy-60 && bullet->yBullet<enemy->yEnemy+60 && bullet->yBullet>enemy->yEnemy-60){
                                     enemy->enemyLife-=25;
-                                    if(enemy->enemyLife==0)
+                                    if(enemy->enemyLife==0){
                                         cout<<endl<<"dead"<<endl;
+                                        delete enemy;
+                                        enemy = new Enemy();
+                                    }
                                     delete bullet;
                                     firstShoot=true;
                                     break;
