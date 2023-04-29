@@ -159,6 +159,8 @@ void Game::menu(){
 
 }*/
 
+
+
 Bullet *bullet = NULL;
 Arena *arena = NULL;
 Enemy *enemy = NULL;
@@ -166,7 +168,6 @@ Enemy *enemy = NULL;
 void Game::run_game(){
 srand(time(NULL));
     Player x;
-    bullet = new Bullet;
     enemy = new Enemy();
     arena = new Arena();
     //vector <Arena> y;
@@ -242,8 +243,10 @@ srand(time(NULL));
                                 x.offScreen();
                                 break;
                             case SDLK_SPACE:
+
                                 bulletShow=true;
                                 if(firstShoot){
+                                    bullet = new Bullet;
                                     bullet->xBullet=x.xPlayer;
                                     bullet->yBullet=x.yPlayer;
                                     firstShoot=false;
@@ -252,7 +255,7 @@ srand(time(NULL));
                                 cout<<"Koordinate playerja: "<<x.xPlayer<<" "<<x.yPlayer<<endl;
                                 //bullet goes towards enemy
 
-                                for(int i=0; i<10; i++){
+                                for(int i=0; i<50; i++){
                                     if(bullet->xBullet>enemy->xEnemy)
                                         bullet->xBullet--;
                                     else
@@ -273,7 +276,12 @@ srand(time(NULL));
                                         }
                                 }
 
+                                if(bullet->xBullet==enemy->xEnemy && bullet->yBullet==enemy->yEnemy){
+                                    delete bullet;
+                                    firstShoot=true;
+                                    break;
 
+                                }
 
 
                                 break;
