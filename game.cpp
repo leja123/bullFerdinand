@@ -321,11 +321,19 @@ srand(time(NULL));
                                                 arenaCount++;
                                                 if(arenaCount<5){
                                                     arena = new Arena();
+                                                    arenaEnemy = new ArenaEnemy();
+                                                    arenaEnemyKillCount=0;
+                                                    battleBegin=false;
+                                                    cout<<"arena enemy count: "<<arenaCount;
+                                                    showArena=false;
+                                                    cout<<"Kuk je zdej arena enemy count: "<<arenaEnemyKillCount<<endl;
+                                                    break;
                                                 }
                                                 else
                                                     level++;
                                                 break;
                                         }
+
 
                                     }
                                     delete bullet;
@@ -334,7 +342,8 @@ srand(time(NULL));
                                     break;
                                     }
                                 }
-                                if(bullet->xBullet<enemy->xEnemy+60 && bullet->xBullet>enemy->xEnemy-60 && bullet->yBullet<enemy->yEnemy+60 && bullet->yBullet>enemy->yEnemy-60){
+                                else {
+                                    if(bullet->xBullet<enemy->xEnemy+60 && bullet->xBullet>enemy->xEnemy-60 && bullet->yBullet<enemy->yEnemy+60 && bullet->yBullet>enemy->yEnemy-60){
                                     enemy->enemyLife-=25;
                                     if(enemy->enemyLife==0){
                                         killCount++;
@@ -349,6 +358,8 @@ srand(time(NULL));
                                     break;
 
                                 }
+                                }
+
 
 
                                 break;
@@ -388,6 +399,7 @@ srand(time(NULL));
             if(x.xPlayer<arena->xArena+400 && x.xPlayer>arena->xArena-100 && x.yPlayer<arena->yArena+300 && x.yPlayer>arena->yArena-10){
                 showArena=true;
                 battleBegin=true;
+                cout<<"som je prslu"<<endl;
             }
 
             if(showArena){
