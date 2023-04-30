@@ -306,6 +306,7 @@ srand(time(NULL));
                                 cout<<"Enemy life: "<<enemy->enemyLife<<endl;
 
                                 if(battleBegin){
+                                        cout<<"here i am once again"<<endl;
                                     if(bullet->xBullet<arenaEnemy->xArenaEnemy+60 && bullet->xBullet>arenaEnemy->xArenaEnemy-60 && bullet->yBullet<arenaEnemy->yArenaEnemy+60 && bullet->yBullet>arenaEnemy->yArenaEnemy-60){
                                         arenaEnemy->arenaEnemyLife-=25;
                                         if(arenaEnemy->arenaEnemyLife==0){
@@ -313,25 +314,31 @@ srand(time(NULL));
                                             cout<<"Arena enemy kill count: "<<arenaEnemyKillCount;
                                             cout<<endl<<"dead"<<endl;
                                             delete arenaEnemy;
-                                            if(arenaEnemyKillCount<3){
+                                            if((arenaEnemyKillCount<3&&level==1) || (arenaEnemyKillCount<5&&level==2)){
                                                 arenaEnemy = new ArenaEnemy();
                                             }
                                             else{
                                                 delete arena;
                                                 arenaCount++;
-                                                if(arenaCount<5){
-                                                    arena = new Arena();
-                                                    arenaEnemy = new ArenaEnemy();
-                                                    arenaEnemyKillCount=0;
-                                                    battleBegin=false;
-                                                    cout<<"arena enemy count: "<<arenaCount;
-                                                    showArena=false;
-                                                    cout<<"Kuk je zdej arena enemy count: "<<arenaEnemyKillCount<<endl;
-                                                    break;
-                                                }
-                                                else
+                                                arena = new Arena();
+                                                arenaEnemy = new ArenaEnemy();
+                                                arenaEnemyKillCount=0;
+                                                battleBegin=false;
+                                                showArena=false;
+                                                if(arenaCount>=5){
                                                     level++;
-                                                break;
+                                                    arenaCount=0;
+                                                    delete arenaEnemy;
+                                                    delete bullet;
+                                                    firstShoot=true;
+                                                    cout<<"LEVEL UP!"<<endl;
+                                                }
+                                                if(level>2){
+                                                    cout<<"Game over";
+
+                                                }
+                                                cout<<"LEVEL: "<<level;
+
                                         }
 
 
@@ -339,7 +346,7 @@ srand(time(NULL));
                                     delete bullet;
                                     firstShoot=true;
                                     bulletShow=false;
-                                    break;
+
                                     }
                                 }
                                 else {
