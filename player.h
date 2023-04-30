@@ -32,4 +32,11 @@ class Bullet : public Player{
     Bullet();
 };
 
+class Bull {
+  public:
+    int xBull;
+    int yBull;
+    Bull();
+};
+
 #endif // PLAYER_H

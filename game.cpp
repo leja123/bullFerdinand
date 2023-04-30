@@ -52,6 +52,8 @@ SDL_Surface *gEnemy = NULL;
 
 SDL_Surface *gArenaEnemy = NULL;
 
+SDL_Surface *gBull = NULL;
+
 SDL_Surface* loadSurface( std::string path )
 {
     //Load image at specified path
@@ -162,7 +164,7 @@ void Game::menu(){
 }*/
 
 
-
+Bull *bull = NULL;
 Bullet *bullet = NULL;
 Arena *arena = NULL;
 Enemy *enemy = NULL;
@@ -177,6 +179,7 @@ srand(time(NULL));
     int level=1;
     bool showArena=false;
     bool battleBegin=false;
+    bool showBull=false;
     enemy = new Enemy();
     arena = new Arena();
     arenaEnemy = new ArenaEnemy();
@@ -332,6 +335,9 @@ srand(time(NULL));
                                                     delete bullet;
                                                     firstShoot=true;
                                                     cout<<"LEVEL UP!"<<endl;
+                                                    //som napiš koda za boka
+                                                    bull = new Bull();
+                                                    showBull=true;
                                                 }
                                                 if(level>2){
                                                     cout<<"Game over";
@@ -462,6 +468,15 @@ srand(time(NULL));
             }*/
 
 
+            if(showBull){
+                SDL_Rect destB;
+                destB.x = bull->xBull;
+                destB.y = bull->yBull;
+                destB.w = 60;
+                destB.h = 60;
+                SDL_BlitScaled( gBull, NULL, gScreenSurface, &destB );
+
+            }
 
             bool col=false;
             //bool colEnemy=false;
@@ -596,6 +611,8 @@ bool Game::loadMedia()
     gEnemy=SDL_LoadBMP("enemy.bmp");
 
     gBullet=SDL_LoadBMP("bullet.bmp");
+
+    gBull=SDL_LoadBMP("bull.bmp");
 
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = loadSurface( "default.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == NULL )

@@ -63,6 +63,10 @@ Bullet::Bullet(){
     yBullet=yPlayer;
 }
 
+Bull::Bull(){
+    xBull=rand()%(1220-0)+0;
+    yBull=rand()%(660-0)+0;
+}
 
 
 
