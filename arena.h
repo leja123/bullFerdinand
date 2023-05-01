@@ -10,8 +10,8 @@ class Arena {
 
 class ArenaEnemy : public Arena {
   public:
-    int xArenaEnemy;
-    int yArenaEnemy;
+    float xArenaEnemy;
+    float yArenaEnemy;
     int arenaEnemyLife;
     ArenaEnemy();
 };

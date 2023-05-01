@@ -388,19 +388,7 @@ srand(time(NULL));
                                                     bull = new Bull();
                                                     door = new Door();
                                                     showBull=true;
-
-
-
-
-
-
-
                                                     }
-
-                                                if(level>2){
-                                                    cout<<"Game over";
-
-                                                }
                                                 cout<<"LEVEL: "<<level;
                                                 if(level<3){
                                                     arena = new Arena();
@@ -487,6 +475,7 @@ srand(time(NULL));
                 SDL_BlitScaled( gArena, NULL, gScreenSurface, &destA );
 			}
 
+			bool colAP=false;
 			if(battleBegin){
                 //render enemies in arena
                 SDL_Rect destAE;
@@ -495,6 +484,37 @@ srand(time(NULL));
                 destAE.w = 60;
                 destAE.h = 60;
                 SDL_BlitScaled( gArenaEnemy, NULL, gScreenSurface, &destAE );
+
+                int A2=x.xPlayer;
+                int B2=x.xPlayer+60;
+                int C2=x.yPlayer;
+                int D2=x.yPlayer+60;
+
+                int A1=arenaEnemy->xArenaEnemy;
+                int B1=arenaEnemy->xArenaEnemy+60;
+                int C1=arenaEnemy->yArenaEnemy;
+                int D1=arenaEnemy->yArenaEnemy+60;
+
+                if(x.xPlayer<arenaEnemy->xArenaEnemy+200 && x.xPlayer>arenaEnemy->xArenaEnemy-200 && x.yPlayer<arenaEnemy->yArenaEnemy+200 && x.yPlayer>arenaEnemy->yArenaEnemy-200){
+                if(D1<=C2)
+                    colAP=true;
+                if(C1>=D2)
+                    colAP=true;
+                if(B1<=A2)
+                    colAP=true;
+                if(A1>=B2)
+                    colAP=true;
+                }
+                if(arenaEnemy->xArenaEnemy+200 && x.xPlayer>arenaEnemy->xArenaEnemy-200 && x.yPlayer<arenaEnemy->yArenaEnemy+200 && x.yPlayer>arenaEnemy->yArenaEnemy-200 && colAP ){ //!colEnemy
+                    if(arenaEnemy->xArenaEnemy>x.xPlayer)
+                        arenaEnemy->xArenaEnemy-=0.5;
+                    else
+                        arenaEnemy->xArenaEnemy+=0.5;
+                    if(arenaEnemy->yArenaEnemy>x.yPlayer)
+                        arenaEnemy->yArenaEnemy-=0.5;
+                    else
+                        arenaEnemy->yArenaEnemy+=0.5;
+                }
 
 
             }
@@ -552,24 +572,24 @@ srand(time(NULL));
             }
             bool colBP=false;
             if(showBull){
-                 int A2=x.xPlayer;
-                int B2=x.xPlayer+60;
-                int C2=x.yPlayer;
-                int D2=x.yPlayer+60;
+                int A22=x.xPlayer;
+                int B22=x.xPlayer+60;
+                int C22=x.yPlayer;
+                int D22=x.yPlayer+60;
 
-                int A1=bull->xBull;
-                int B1=bull->xBull+60;
-                int C1=bull->yBull;
-                int D1=bull->yBull+60;
+                int A11=bull->xBull;
+                int B11=bull->xBull+60;
+                int C11=bull->yBull;
+                int D11=bull->yBull+60;
 
                 if(x.xPlayer<bull->xBull+200 && x.xPlayer>bull->xBull-200 && x.yPlayer<bull->yBull+200 && x.yPlayer>bull->yBull-200){
-                if(D1<=C2)
+                if(D11<=C22)
                     colBP=true;
-                if(C1>=D2)
+                if(C11>=D22)
                     colBP=true;
-                if(B1<=A2)
+                if(B11<=A22)
                     colBP=true;
-                if(A1>=B2)
+                if(A11>=B22)
                     colBP=true;
                 }
 
@@ -606,7 +626,7 @@ srand(time(NULL));
             bool col=false;
             //bool colEnemy=false;
             //render enemies
-            for(int i=0; i<2; i++){
+
                 SDL_Rect destE;
                 destE.x = enemy->xEnemy;
                 destE.y = enemy->yEnemy;
@@ -616,26 +636,26 @@ srand(time(NULL));
                 //chases player if less than 200px away
 
                 //collisiion
-                int A2=x.xPlayer;
-                int B2=x.xPlayer+60;
-                int C2=x.yPlayer;
-                int D2=x.yPlayer+60;
+                int A222=x.xPlayer;
+                int B222=x.xPlayer+60;
+                int C222=x.yPlayer;
+                int D222=x.yPlayer+60;
 
-                int A1=enemy->xEnemy;
-                int B1=enemy->xEnemy+60;
-                int C1=enemy->yEnemy;
-                int D1=enemy->yEnemy+60;
+                int A111=enemy->xEnemy;
+                int B111=enemy->xEnemy+60;
+                int C111=enemy->yEnemy;
+                int D111=enemy->yEnemy+60;
 
                 if(x.xPlayer<enemy->xEnemy+200 && x.xPlayer>enemy->xEnemy-200 && x.yPlayer<enemy->yEnemy+200 && x.yPlayer>enemy->yEnemy-200){
-                if(D1<=C2)
+                if(D111<=C222)
                     col=true;
-                if(C1>=D2)
+                if(C111>=D222)
                     col=true;
-                if(B1<=A2)
+                if(B111<=A222)
                     col=true;
-                if(A1>=B2)
+                if(A111>=B222)
                     col=true;
-                }
+
 
 
                 /*for(int i=0; i<2; i++){
