@@ -402,8 +402,11 @@ srand(time(NULL));
 
                                                 }
                                                 cout<<"LEVEL: "<<level;
-                                                arena = new Arena();
+                                                if(level<3){
+                                                    arena = new Arena();
                                                 arenaEnemy = new ArenaEnemy();
+                                                }
+
 
                                         }
 
