@@ -547,9 +547,30 @@ srand(time(NULL));
                 SDL_BlitScaled( gDoor, NULL, gScreenSurface, &destD );
 
             }
-            bool colBD=false;
+            bool colBP=false;
             if(showBull){
-                if(bull->xBull+200 && x.xPlayer>bull->xBull-200 && x.yPlayer<bull->yBull+200 && x.yPlayer>bull->yBull-200 ){
+                 int A2=x.xPlayer;
+                int B2=x.xPlayer+60;
+                int C2=x.yPlayer;
+                int D2=x.yPlayer+60;
+
+                int A1=bull->xBull;
+                int B1=bull->xBull+60;
+                int C1=bull->yBull;
+                int D1=bull->yBull+60;
+
+                if(x.xPlayer<bull->xBull+200 && x.xPlayer>bull->xBull-200 && x.yPlayer<bull->yBull+200 && x.yPlayer>bull->yBull-200){
+                if(D1<=C2)
+                    colBP=true;
+                if(C1>=D2)
+                    colBP=true;
+                if(B1<=A2)
+                    colBP=true;
+                if(A1>=B2)
+                    colBP=true;
+                }
+
+                if(bull->xBull+200 && x.xPlayer>bull->xBull-200 && x.yPlayer<bull->yBull+200 && x.yPlayer>bull->yBull-200 && colBP){
                         cout<<"bitch im here"<<endl;
                         if(bull->xBull>x.xPlayer)
                             bull->xBull-=0.5;
@@ -576,26 +597,7 @@ srand(time(NULL));
 
             }
 
-                int A2=bull->xBull; //xplayer
-                int B2=bull->xBull+60;
-                int C2=bull->yBull;
-                int D2=bull->yBull+60;
 
-                int A1=door->xDoor;  //xenemy
-                int B1=door->xDoor+60;
-                int C1=door->yDoor;
-                int D1=door->yDoor+60;
-
-                if(bull->xBull<door->xDoor+200 && bull->xBull>door->xDoor-200 && bull->yBull<door->yDoor+200 && bull->yBull>door->yDoor-200){
-                if(D1<=C2)
-                    colBD=true;
-                if(C1>=D2)
-                    colBD=true;
-                if(B1<=A2)
-                    colBD=true;
-                if(A1>=B2)
-                    colBD=true;
-                }
 
 
             bool col=false;
