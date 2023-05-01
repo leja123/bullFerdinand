@@ -34,9 +34,16 @@ class Bullet : public Player{
 
 class Bull {
   public:
-    int xBull;
-    int yBull;
+    float xBull;
+    float yBull;
     Bull();
+};
+
+class Door {
+public:
+    int xDoor;
+    int yDoor;
+    Door();
 };
 
 #endif // PLAYER_H

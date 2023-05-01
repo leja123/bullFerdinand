@@ -68,5 +68,10 @@ Bull::Bull(){
     yBull=rand()%(660-0)+0;
 }
 
+Door::Door(){
+    xDoor=640;
+    yDoor=660;
+}
+
 
 

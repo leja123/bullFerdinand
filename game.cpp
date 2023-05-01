@@ -54,6 +54,8 @@ SDL_Surface *gArenaEnemy = NULL;
 
 SDL_Surface *gBull = NULL;
 
+SDL_Surface *gDoor = NULL;
+
 SDL_Surface* loadSurface( std::string path )
 {
     //Load image at specified path
@@ -126,7 +128,51 @@ void Game::pause(){
 }
 
 void Game::menu(){
-    if( !init() )
+    /*if( !init() )
+	{
+		cout<<"Failed to initialize!\n";
+	}
+	else
+	{
+		//Load media
+		if( !loadMedia() )
+		{
+			cout<<"Failed to load media!\n";
+		}
+		else
+		{
+		    cout<<"here1"<<endl;
+		    SDL_UpdateWindowSurface( gWindow );
+		    SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
+		    cout<<"here3"<<endl;
+            //bool quit = false;
+            int x;
+            cin>>x;
+            cout<<"here2"<<endl;
+            switch(x)
+            {
+                case 1:
+                    cout<<"Enter your name: "<<endl;
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                break;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+		close();*/
+		if( !init() )
 	{
 		cout<<"Failed to initialize!\n";
 	}
@@ -157,6 +203,8 @@ void Game::menu(){
 		close();
 	}
 
+
+
 }
 
 /*Game::~Game(){
@@ -169,6 +217,7 @@ Bullet *bullet = NULL;
 Arena *arena = NULL;
 Enemy *enemy = NULL;
 ArenaEnemy *arenaEnemy = NULL;
+Door *door = NULL;
 
 void Game::run_game(){
 srand(time(NULL));
@@ -262,6 +311,7 @@ srand(time(NULL));
                                     bullet->xBullet=x.xPlayer;
                                     bullet->yBullet=x.yPlayer;
                                     firstShoot=false;
+
                                 }
                                /* cout<<"kordinate bulleta: "<<bullet->xBullet<<" "<<bullet->yBullet<<endl;
                                 cout<<"Koordinate playerja: "<<x.xPlayer<<" "<<x.yPlayer<<endl;*/
@@ -323,8 +373,6 @@ srand(time(NULL));
                                             else{
                                                 delete arena;
                                                 arenaCount++;
-                                                arena = new Arena();
-                                                arenaEnemy = new ArenaEnemy();
                                                 arenaEnemyKillCount=0;
                                                 battleBegin=false;
                                                 showArena=false;
@@ -337,13 +385,23 @@ srand(time(NULL));
                                                     cout<<"LEVEL UP!"<<endl;
                                                     //som napiš koda za boka
                                                     bull = new Bull();
+                                                    door = new Door();
+                                                    bool bullIsSafe=false;
                                                     showBull=true;
-                                                }
+
+
+
+
+
+                                                    }
+
                                                 if(level>2){
                                                     cout<<"Game over";
 
                                                 }
                                                 cout<<"LEVEL: "<<level;
+                                                arena = new Arena();
+                                                arenaEnemy = new ArenaEnemy();
 
                                         }
 
@@ -478,6 +536,39 @@ srand(time(NULL));
 
             }
 
+            if(showBull){
+                SDL_Rect destD;
+                destD.x = door->xDoor;
+                destD.y = door->yDoor;
+                destD.w = 60;
+                destD.h = 60;
+                SDL_BlitScaled( gDoor, NULL, gScreenSurface, &destD );
+
+            }
+
+            if(showBull){
+                if(bull->xBull+200 && x.xPlayer>bull->xBull-200 && x.yPlayer<bull->yBull+200 && x.yPlayer>bull->yBull-200 ){
+                        cout<<"bitch im here"<<endl;
+                        if(bull->xBull>x.xPlayer)
+                            bull->xBull-=0.5;
+                        else
+                            bull->xBull+=0.5;
+                        if(bull->yBull>x.yPlayer)
+                            bull->yBull-=0.5;
+                        else
+                            bull->yBull+=0.5;
+                        }
+                        SDL_Rect destB;
+                        destB.x = bull->xBull;
+                        destB.y = bull->yBull;
+                        destB.w = 60;
+                        destB.h = 60;
+                        SDL_BlitScaled( gBull, NULL, gScreenSurface, &destB );
+                        /*if((bull->xBull==door->xDoor) && (bull->yBull==door->yDoor))
+                        bullIsSafe=true;*/
+            }
+
+
             bool col=false;
             //bool colEnemy=false;
             //render enemies
@@ -590,7 +681,7 @@ bool Game::loadMedia()
 		success = false;
 	}
 
-	gMenuBackground = SDL_LoadBMP( "menubg.bmp" );
+	gMenuBackground = SDL_LoadBMP( "menu.bmp" );
 	if( gMenuBackground == NULL )
 	{
 		cout<<"Unable to load image %s! SDL Error: \n"<< "menubg.bmp"<< SDL_GetError();
@@ -613,6 +704,8 @@ bool Game::loadMedia()
     gBullet=SDL_LoadBMP("bullet.bmp");
 
     gBull=SDL_LoadBMP("bull.bmp");
+
+    gDoor=SDL_LoadBMP("door.bmp");
 
     gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] = loadSurface( "default.bmp" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ] == NULL )
@@ -666,7 +759,7 @@ bool Game::loadMedia()
 void Game::close()
 {
     SDL_FreeSurface( gMenuBackground );
-	gBackground = NULL;
+	gMenuBackground = NULL;
 	//Deallocate surface
 	SDL_FreeSurface( gBackground );
 	gBackground = NULL;
