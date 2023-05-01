@@ -229,6 +229,7 @@ srand(time(NULL));
     bool showArena=false;
     bool battleBegin=false;
     bool showBull=false;
+    bool bullIsSafe=false;
     enemy = new Enemy();
     arena = new Arena();
     arenaEnemy = new ArenaEnemy();
@@ -386,8 +387,9 @@ srand(time(NULL));
                                                     //som napiš koda za boka
                                                     bull = new Bull();
                                                     door = new Door();
-                                                    bool bullIsSafe=false;
                                                     showBull=true;
+
+
 
 
 
@@ -545,7 +547,7 @@ srand(time(NULL));
                 SDL_BlitScaled( gDoor, NULL, gScreenSurface, &destD );
 
             }
-
+            bool colBD=false;
             if(showBull){
                 if(bull->xBull+200 && x.xPlayer>bull->xBull-200 && x.yPlayer<bull->yBull+200 && x.yPlayer>bull->yBull-200 ){
                         cout<<"bitch im here"<<endl;
@@ -564,9 +566,36 @@ srand(time(NULL));
                         destB.w = 60;
                         destB.h = 60;
                         SDL_BlitScaled( gBull, NULL, gScreenSurface, &destB );
-                        /*if((bull->xBull==door->xDoor) && (bull->yBull==door->yDoor))
-                        bullIsSafe=true;*/
+                        if((door->xDoor+60 && bull->xBull>door->xDoor-60 && bull->yBull<door->yDoor+60 && bull->yBull>door->yDoor-60 ))
+                        {
+
+                            showBull=false;
+                            delete bull;
+                            delete door;
+                        }
+
             }
+
+                int A2=bull->xBull; //xplayer
+                int B2=bull->xBull+60;
+                int C2=bull->yBull;
+                int D2=bull->yBull+60;
+
+                int A1=door->xDoor;  //xenemy
+                int B1=door->xDoor+60;
+                int C1=door->yDoor;
+                int D1=door->yDoor+60;
+
+                if(bull->xBull<door->xDoor+200 && bull->xBull>door->xDoor-200 && bull->yBull<door->yDoor+200 && bull->yBull>door->yDoor-200){
+                if(D1<=C2)
+                    colBD=true;
+                if(C1>=D2)
+                    colBD=true;
+                if(B1<=A2)
+                    colBD=true;
+                if(A1>=B2)
+                    colBD=true;
+                }
 
 
             bool col=false;
