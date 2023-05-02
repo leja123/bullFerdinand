@@ -91,7 +91,10 @@ void Game::pause(){
             {
 
             while(1){
+
+
                 SDL_BlitSurface( gPause, NULL, gScreenSurface, NULL );
+                SDL_UpdateWindowSurface( gWindow );
                 bool quit=false;
                 SDL_Event e;
                 while( !quit )
@@ -119,8 +122,6 @@ void Game::pause(){
                 }
             }
 
-
-                SDL_UpdateWindowSurface( gWindow );
             }
 
             }
@@ -171,6 +172,7 @@ void Game::menu(){
                 case 3:
                 case 4:
                 case 5:
+                    run_game();
                 break;
             }
             cout<<"Hello "<<name;
@@ -242,6 +244,7 @@ Door *door = NULL;
 void Game::run_game(){
 srand(time(NULL));
     Player x;
+    int totalKills=0;
     int killCount=0;
     int arenaCount=0;
     int arenaEnemyKillCount=0;
@@ -334,13 +337,7 @@ srand(time(NULL));
                                     firstShoot=false;
 
                                 }
-                               /* cout<<"kordinate bulleta: "<<bullet->xBullet<<" "<<bullet->yBullet<<endl;
-                                cout<<"Koordinate playerja: "<<x.xPlayer<<" "<<x.yPlayer<<endl;*/
-                                //bullet goes towards enemy
-
-
                                 if(battleBegin){
-                                    //if(((arenaEnemy->xArenaEnemy-x.xPlayer) && (arenaEnemy->yArenaEnemy-x.yPlayer)) > ((enemy->xEnemy-x.xPlayer)&&(enemy->yEnemy-x.yPlayer))){
                                         for(int i=0; i<50; i++){
                                             if(bullet->xBullet>arenaEnemy->xArenaEnemy)
                                                 bullet->xBullet--;
@@ -363,11 +360,6 @@ srand(time(NULL));
                                     else
                                         bullet->yBullet++;
                                     }
-
-
-
-
-
                                         if(bulletShow){
                                             SDL_Rect destB;
                                             destB.x = bullet->xBullet;
@@ -377,17 +369,15 @@ srand(time(NULL));
                                             SDL_BlitScaled( gBullet, NULL, gScreenSurface, &destB );
                                         }
                                 }
-                                cout<<"Enemy life: "<<enemy->enemyLife<<endl;
-
+                                //ce je battle begin true pal strejle sam une arena enemije
                                 if(battleBegin){
-                                        cout<<"here i am once again"<<endl;
                                     if(bullet->xBullet<arenaEnemy->xArenaEnemy+60 && bullet->xBullet>arenaEnemy->xArenaEnemy-60 && bullet->yBullet<arenaEnemy->yArenaEnemy+60 && bullet->yBullet>arenaEnemy->yArenaEnemy-60){
                                         arenaEnemy->arenaEnemyLife-=25;
                                         if(arenaEnemy->arenaEnemyLife==0){
                                             arenaEnemyKillCount++;
-                                            cout<<"Arena enemy kill count: "<<arenaEnemyKillCount;
-                                            cout<<endl<<"dead"<<endl;
+                                            totalKills++;
                                             delete arenaEnemy;
+                                            //ce je prvi level sa 3 enemi ce je pa drugi level ih je pa 5
                                             if((arenaEnemyKillCount<3&&level==1) || (arenaEnemyKillCount<5&&level==2)){
                                                 arenaEnemy = new ArenaEnemy();
                                             }
@@ -397,42 +387,35 @@ srand(time(NULL));
                                                 arenaEnemyKillCount=0;
                                                 battleBegin=false;
                                                 showArena=false;
+                                                //new level
                                                 if(arenaCount>=5){
                                                     level++;
                                                     arenaCount=0;
                                                     delete arenaEnemy;
                                                     delete bullet;
                                                     firstShoot=true;
-                                                    cout<<"LEVEL UP!"<<endl;
-                                                    //som napiš koda za boka
                                                     bull = new Bull();
                                                     door = new Door();
                                                     showBull=true;
                                                     }
-                                                cout<<"LEVEL: "<<level;
                                                 if(level<3){
                                                     arena = new Arena();
                                                 arenaEnemy = new ArenaEnemy();
                                                 }
-
-
                                         }
-
-
                                     }
                                     delete bullet;
                                     firstShoot=true;
                                     bulletShow=false;
-
                                     }
                                 }
+                                //ce je battlebegin false (strejle ta druge enemije)
                                 else {
                                     if(bullet->xBullet<enemy->xEnemy+60 && bullet->xBullet>enemy->xEnemy-60 && bullet->yBullet<enemy->yEnemy+60 && bullet->yBullet>enemy->yEnemy-60){
                                     enemy->enemyLife-=25;
                                     if(enemy->enemyLife==0){
                                         killCount++;
-                                        cout<<"Kill count: "<<killCount;
-                                        cout<<endl<<"dead"<<endl;
+                                        totalKills++;
                                         delete enemy;
                                         enemy = new Enemy();
                                     }
@@ -443,34 +426,35 @@ srand(time(NULL));
 
                                 }
                                 }
-
-
-
                                 break;
                             case SDLK_ESCAPE:
+                               /* ofstream pauseData;
+                                pauseData.open("pause.txt");
+                                pauseData<<x.xPlayer<<x.yPlayer<<totalKills<<killCount<<arenaEnemyKillCount<<arenaCount<<level;
+                                pauseData.close();
                                 pause();
-                                break;
+                                break;*/
+                                {
+    std::ofstream pauseData("pause.bin", std::ios::out | std::ios::binary);
+    if (pauseData.is_open())
+    {
+        pauseData.write(reinterpret_cast<const char*>(&x.xPlayer), sizeof(x.xPlayer));
+        pauseData.write(reinterpret_cast<const char*>(&x.yPlayer), sizeof(x.yPlayer));
+        pauseData.write(reinterpret_cast<const char*>(&totalKills), sizeof(totalKills));
+        pauseData.write(reinterpret_cast<const char*>(&killCount), sizeof(killCount));
+        pauseData.write(reinterpret_cast<const char*>(&arenaEnemyKillCount), sizeof(arenaEnemyKillCount));
+        pauseData.write(reinterpret_cast<const char*>(&arenaCount), sizeof(arenaCount));
+        pauseData.write(reinterpret_cast<const char*>(&level), sizeof(level));
+        pauseData.close();
+        pause();
+    }
+    break;
+}
                             default:
                                 gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
                                 x.offScreen();
                                 break;
                         }
-                        /*if(e.key.keysym.sym==SDLK_SPACE)
-                            for(int i=0; i<5; i++){
-                                if(e.key.keysym.sym==SDLK_SPACE){
-                                SDL_Rect destB;
-                                destB.x = w[i].xBullet;
-                                destB.y = w[i].yBullet;
-                                destB.w = 60;
-                                destB.h = 60;
-                                SDL_BlitScaled( gBullet, NULL, gScreenSurface, &destB );
-
-                                }
-                                while(w[i].xBullet<=SCREEN_WIDTH){
-                                    w[i].xBullet++;
-                                }
-                            }*/
-
                     }
                 }
                 //Update the surface
@@ -535,11 +519,7 @@ srand(time(NULL));
                     else
                         arenaEnemy->yArenaEnemy+=0.5;
                 }
-
-
             }
-
-
 
 			//render bullet
 			if(bulletShow){
@@ -558,18 +538,6 @@ srand(time(NULL));
             dest.w = 60;
             dest.h = 60;
             SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &dest );
-
-            /*for(int i=0; i<5; i++){
-                if(e.key.keysym.sym==SDLK_SPACE){
-                SDL_Rect destB;
-                destB.x = w[i].xBullet;
-                destB.y = w[i].yBullet;
-                destB.w = 60;
-                destB.h = 60;
-                SDL_BlitScaled( gPlayer, NULL, gScreenSurface, &destB );
-                }
-            }*/
-
 
             if(showBull){
                 SDL_Rect destB;
@@ -637,14 +605,9 @@ srand(time(NULL));
                             delete bull;
                             delete door;
                         }
-
             }
 
-
-
-
             bool col=false;
-            //bool colEnemy=false;
             //render enemies
 
                 SDL_Rect destE;
@@ -675,20 +638,6 @@ srand(time(NULL));
                     col=true;
                 if(A111>=B222)
                     col=true;
-
-
-
-                /*for(int i=0; i<2; i++){
-                    for(int j=i+1; j<2; j++){
-                        if(z[i].xEnemy < z[j].xEnemy+60 &&
-                           z[i].xEnemy+60 > z[j].xEnemy&&
-                           z[i].yEnemy < z[j].yEnemy+60 &&
-                           z[i].yEnemy+60 > z[j].xEnemy)
-                            colEnemy= true;
-                        else
-                            colEnemy=false;
-                    }
-                }*/
 
 
                 if(enemy->xEnemy+200 && x.xPlayer>enemy->xEnemy-200 && x.yPlayer<enemy->yEnemy+200 && x.yPlayer>enemy->yEnemy-200 && col ){ //!colEnemy
@@ -832,8 +781,8 @@ bool Game::loadMedia()
 
 void Game::close()
 {
-    SDL_FreeSurface( gMenuBackground );
-	gMenuBackground = NULL;
+    //SDL_FreeSurface( gMenuBackground );
+	//gMenuBackground = NULL;
 	//Deallocate surface
 	SDL_FreeSurface( gBackground );
 	gBackground = NULL;
