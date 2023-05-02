@@ -4,7 +4,8 @@
 #include "arena.h"
 #include <SDL.h>
 #include <ctime>
-#include <vector>
+#include <cstring>
+#include <fstream>
 
 using namespace std;
 
@@ -128,7 +129,7 @@ void Game::pause(){
 }
 
 void Game::menu(){
-    /*if( !init() )
+    if( !init() )
 	{
 		cout<<"Failed to initialize!\n";
 	}
@@ -142,24 +143,44 @@ void Game::menu(){
 		else
 		{
 		    cout<<"here1"<<endl;
-		    SDL_UpdateWindowSurface( gWindow );
-		    SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
+            SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
+
+            SDL_UpdateWindowSurface( gWindow );
+
 		    cout<<"here3"<<endl;
             //bool quit = false;
             int x;
+            char name[21];
             cin>>x;
             cout<<"here2"<<endl;
+            ofstream data;
             switch(x)
             {
                 case 1:
                     cout<<"Enter your name: "<<endl;
+
+                    data.open("name.txt");
+                    cin.ignore();
+                    fgets(name, 21, stdin);
+                    data<<name;
+                    data.close();
                     break;
                 case 2:
+                    pause();
+                    break;
                 case 3:
                 case 4:
                 case 5:
                 break;
             }
+            cout<<"Hello "<<name;
+            bool closewindow=false;
+            while(!closewindow){
+            SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
+
+            SDL_UpdateWindowSurface( gWindow );
+        }
+
         }
     }
 
@@ -171,8 +192,8 @@ void Game::menu(){
 
 
 
-		close();*/
-		if( !init() )
+		close();
+		/*if( !init() )
 	{
 		cout<<"Failed to initialize!\n";
 	}
@@ -201,8 +222,7 @@ void Game::menu(){
 
 		}
 		close();
-	}
-
+	}*/
 
 
 }
