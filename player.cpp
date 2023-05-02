@@ -59,8 +59,8 @@ Enemy::Enemy(){
 }
 
 Bullet::Bullet(){
-    xBullet=xPlayer;
-    yBullet=yPlayer;
+    xBullet=0;
+    yBullet=0;
 }
 
 Bull::Bull(){

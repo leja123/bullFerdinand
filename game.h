@@ -11,6 +11,8 @@ class Game{
     void run_game();
     void pause();
     void hidePauseScreen();
+    void replay();
+    void leaderboard();
     bool loadMedia();
     void close();
 };

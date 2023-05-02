@@ -69,6 +69,12 @@ SDL_Surface* loadSurface( std::string path )
     return loadedSurface;
 }
 
+Bull *bull = NULL;
+Bullet *bullet = NULL;
+Arena *arena = NULL;
+Enemy *enemy = NULL;
+ArenaEnemy *arenaEnemy = NULL;
+Door *door = NULL;
 
 
 Game::Game(){
@@ -129,6 +135,38 @@ void Game::pause(){
         }
 }
 
+void Game::leaderboard(){
+    if( !init() )
+        {
+            cout<<"Failed to initialize!\n";
+        }
+        else
+        {
+            //Load media
+            if( !loadMedia() )
+            {
+                cout<<"Failed to load media!\n";
+            }
+            else
+            {
+
+                SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
+                SDL_UpdateWindowSurface( gWindow );
+                cout<<"LEADERBOARD: "<<endl;
+                ifstream data;
+                string a;
+                data.open("scores.txt");
+                data>>a;
+                cout<<a;
+                data.close();
+
+            }
+            close();
+        }
+}
+
+
+
 void Game::menu(){
     if( !init() )
 	{
@@ -143,39 +181,45 @@ void Game::menu(){
 		}
 		else
 		{
-		    cout<<"here1"<<endl;
             SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
 
             SDL_UpdateWindowSurface( gWindow );
-
-		    cout<<"here3"<<endl;
             //bool quit = false;
+            bool repeat=true;
             int x;
             char name[21];
-            cin>>x;
-            cout<<"here2"<<endl;
-            ofstream data;
-            switch(x)
-            {
-                case 1:
-                    cout<<"Enter your name: "<<endl;
+            while(repeat){
+                cin>>x;
+                ofstream data;
+                switch(x)
+                {
+                    case 1:
+                        cout<<"Enter your name: "<<endl;
+                        data.open("scores.txt");
+                        cin.ignore();
+                        fgets(name, 21, stdin);
+                        data<<name;
+                        data.close();
+                        cout<<"Hello "<<name;
+                        break;
+                    case 2:
+                        repeat=false;
+                        pause();
+                        break;
+                    case 3:
+                        leaderboard();
+                        break;
+                    case 4:
+                        replay();
+                        break;
+                    case 5:
+                        repeat=false;
+                        run_game();
+                    break;
+                }
 
-                    data.open("name.txt");
-                    cin.ignore();
-                    fgets(name, 21, stdin);
-                    data<<name;
-                    data.close();
-                    break;
-                case 2:
-                    pause();
-                    break;
-                case 3:
-                case 4:
-                case 5:
-                    run_game();
-                break;
             }
-            cout<<"Hello "<<name;
+
             bool closewindow=false;
             while(!closewindow){
             SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
@@ -186,60 +230,81 @@ void Game::menu(){
         }
     }
 
-
-
-
-
-
-
-
-
 		close();
-		/*if( !init() )
-	{
-		cout<<"Failed to initialize!\n";
-	}
-	else
-	{
-		//Load media
-		if( !loadMedia() )
-		{
-			cout<<"Failed to load media!\n";
-		}
-		else
-		{
-        bool closewindow=false;
-        while(!closewindow){
-            SDL_BlitSurface( gMenuBackground, NULL, gScreenSurface, NULL );
-
-            SDL_UpdateWindowSurface( gWindow );
-        }
-
-
-
-
-
-
-
-
-		}
-		close();
-	}*/
-
-
 }
 
-/*Game::~Game(){
 
-}*/
+void savePlayerPosition(int x, int y) {
+    ofstream outFile("player_position.bin", ios::out | ios::binary);
+    outFile.write(reinterpret_cast<const char*>(&x), sizeof(x));
+    outFile.write(reinterpret_cast<const char*>(&y), sizeof(y));
+    outFile.close();
+}
+
+void loadPlayerPosition(int &x, int &y) {
+    ifstream inFile("player_position.bin", ios::in | ios::binary);
+    inFile.read(reinterpret_cast<char*>(&x), sizeof(x));
+    inFile.read(reinterpret_cast<char*>(&y), sizeof(y));
+    inFile.close();
+}
 
 
-Bull *bull = NULL;
-Bullet *bullet = NULL;
-Arena *arena = NULL;
-Enemy *enemy = NULL;
-ArenaEnemy *arenaEnemy = NULL;
-Door *door = NULL;
+void Game::replay() {
+    if (!init()) {
+        cout << "Failed to initialize!\n";
+        return;
+    }
+
+    if (!loadMedia()) {
+        cout << "Failed to load media!\n";
+        return;
+    }
+
+    // Load player position from file
+    Player y;
+
+    while (true) {
+        SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+
+        SDL_Event e;
+        bool quit = false;
+        while (!quit) {
+            while (SDL_PollEvent(&e) != 0) {
+                if (e.type == SDL_QUIT) {
+                    quit = true;
+                }
+            }
+            // Move player according to the loaded position
+            if (y.yPlayer > 0) {
+                y.yPlayer -= 1;
+            }
+            if (y.xPlayer > 0) {
+                y.xPlayer -= 1;
+            }
+            if (y.yPlayer <= 0 && y.xPlayer > 0 && y.xPlayer < 1280 - 60) {
+                y.xPlayer -= 1;
+            }
+            if (y.yPlayer <= 0 && y.xPlayer >= 1280 - 60) {
+                y.yPlayer += 1;
+            }
+            SDL_Rect destReplay;
+            destReplay.x = y.xPlayer;
+            destReplay.y = y.yPlayer;
+            destReplay.w = 60;
+            destReplay.h = 60;
+            SDL_BlitScaled(gPlayer, NULL, gScreenSurface, &destReplay);
+
+            SDL_UpdateWindowSurface(gWindow);
+            SDL_Delay(50);
+        }
+    }
+}
+
+
+
+
+
 
 void Game::run_game(){
 srand(time(NULL));
@@ -256,9 +321,6 @@ srand(time(NULL));
     enemy = new Enemy();
     arena = new Arena();
     arenaEnemy = new ArenaEnemy();
-    //vector <Arena> y;
-    //vector <Enemy> z;
-    //vector <Bullet> w;
 
     bool bulletShow=false;
     bool firstShoot=true;
@@ -309,27 +371,32 @@ srand(time(NULL));
                                 gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ];
                                 x.yPlayer-=10;
                                 x.offScreen();
+                                savePlayerPosition(x.xPlayer, x.yPlayer);
                                 break;
 
                             case SDLK_DOWN:
                                 gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DOWN ];
                                 x.yPlayer+=10;
                                 x.offScreen();
+                                savePlayerPosition(x.xPlayer, x.yPlayer);
                                 break;
 
                             case SDLK_LEFT:
                                 gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_LEFT ];
                                 x.xPlayer-=10;
                                 x.offScreen();
+                                savePlayerPosition(x.xPlayer, x.yPlayer);
                                 break;
 
                             case SDLK_RIGHT:
                                 gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_RIGHT ];
                                 x.xPlayer+=10;
                                 x.offScreen();
+                                savePlayerPosition(x.xPlayer, x.yPlayer);
                                 break;
                             case SDLK_SPACE:
                                 bulletShow=true;
+                                //first shoot je zatu de da bulletu pleyerjeve kordinate
                                 if(firstShoot){
                                     bullet = new Bullet;
                                     bullet->xBullet=x.xPlayer;
@@ -402,6 +469,14 @@ srand(time(NULL));
                                                     arena = new Arena();
                                                 arenaEnemy = new ArenaEnemy();
                                                 }
+                                                else{
+                                                    ofstream data;
+                                                    data.open("scores.txt");
+                                                    data<<totalKills;
+                                                    data.close();
+                                                    replay();
+                                                }
+
                                         }
                                     }
                                     delete bullet;
@@ -428,28 +503,22 @@ srand(time(NULL));
                                 }
                                 break;
                             case SDLK_ESCAPE:
-                               /* ofstream pauseData;
-                                pauseData.open("pause.txt");
-                                pauseData<<x.xPlayer<<x.yPlayer<<totalKills<<killCount<<arenaEnemyKillCount<<arenaCount<<level;
-                                pauseData.close();
-                                pause();
-                                break;*/
                                 {
-    std::ofstream pauseData("pause.bin", std::ios::out | std::ios::binary);
-    if (pauseData.is_open())
-    {
-        pauseData.write(reinterpret_cast<const char*>(&x.xPlayer), sizeof(x.xPlayer));
-        pauseData.write(reinterpret_cast<const char*>(&x.yPlayer), sizeof(x.yPlayer));
-        pauseData.write(reinterpret_cast<const char*>(&totalKills), sizeof(totalKills));
-        pauseData.write(reinterpret_cast<const char*>(&killCount), sizeof(killCount));
-        pauseData.write(reinterpret_cast<const char*>(&arenaEnemyKillCount), sizeof(arenaEnemyKillCount));
-        pauseData.write(reinterpret_cast<const char*>(&arenaCount), sizeof(arenaCount));
-        pauseData.write(reinterpret_cast<const char*>(&level), sizeof(level));
-        pauseData.close();
-        pause();
-    }
-    break;
-}
+                                std::ofstream pauseData("pause.bin", std::ios::out | std::ios::binary);
+                                if (pauseData.is_open())
+                                {
+                                    pauseData.write(reinterpret_cast<const char*>(&x.xPlayer), sizeof(x.xPlayer));
+                                    pauseData.write(reinterpret_cast<const char*>(&x.yPlayer), sizeof(x.yPlayer));
+                                    pauseData.write(reinterpret_cast<const char*>(&totalKills), sizeof(totalKills));
+                                    pauseData.write(reinterpret_cast<const char*>(&killCount), sizeof(killCount));
+                                    pauseData.write(reinterpret_cast<const char*>(&arenaEnemyKillCount), sizeof(arenaEnemyKillCount));
+                                    pauseData.write(reinterpret_cast<const char*>(&arenaCount), sizeof(arenaCount));
+                                    pauseData.write(reinterpret_cast<const char*>(&level), sizeof(level));
+                                    pauseData.close();
+                                    pause();
+                                }
+                                break;
+                            }
                             default:
                                 gPlayer = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
                                 x.offScreen();
@@ -467,7 +536,6 @@ srand(time(NULL));
             if(x.xPlayer<arena->xArena+400 && x.xPlayer>arena->xArena-100 && x.yPlayer<arena->yArena+300 && x.yPlayer>arena->yArena-10){
                 showArena=true;
                 battleBegin=true;
-                cout<<"som je prslu"<<endl;
             }
 
             if(showArena){
@@ -499,7 +567,7 @@ srand(time(NULL));
                 int C1=arenaEnemy->yArenaEnemy;
                 int D1=arenaEnemy->yArenaEnemy+60;
 
-                if(x.xPlayer<arenaEnemy->xArenaEnemy+200 && x.xPlayer>arenaEnemy->xArenaEnemy-200 && x.yPlayer<arenaEnemy->yArenaEnemy+200 && x.yPlayer>arenaEnemy->yArenaEnemy-200){
+                //if(x.xPlayer<arenaEnemy->xArenaEnemy+200 && x.xPlayer>arenaEnemy->xArenaEnemy-200 && x.yPlayer<arenaEnemy->yArenaEnemy+200 && x.yPlayer>arenaEnemy->yArenaEnemy-200){
                 if(D1<=C2)
                     colAP=true;
                 if(C1>=D2)
@@ -508,8 +576,8 @@ srand(time(NULL));
                     colAP=true;
                 if(A1>=B2)
                     colAP=true;
-                }
-                if(arenaEnemy->xArenaEnemy+200 && x.xPlayer>arenaEnemy->xArenaEnemy-200 && x.yPlayer<arenaEnemy->yArenaEnemy+200 && x.yPlayer>arenaEnemy->yArenaEnemy-200 && colAP ){ //!colEnemy
+                //}
+                if(colAP ){ //!colEnemy
                     if(arenaEnemy->xArenaEnemy>x.xPlayer)
                         arenaEnemy->xArenaEnemy-=0.5;
                     else
@@ -582,7 +650,6 @@ srand(time(NULL));
                 }
 
                 if(bull->xBull+200 && x.xPlayer>bull->xBull-200 && x.yPlayer<bull->yBull+200 && x.yPlayer>bull->yBull-200 && colBP){
-                        cout<<"bitch im here"<<endl;
                         if(bull->xBull>x.xPlayer)
                             bull->xBull-=0.5;
                         else
@@ -656,6 +723,8 @@ srand(time(NULL));
 
 		}
 	}
+
+
 
 	//Free resources and close SDL
 	close();
@@ -781,8 +850,6 @@ bool Game::loadMedia()
 
 void Game::close()
 {
-    //SDL_FreeSurface( gMenuBackground );
-	//gMenuBackground = NULL;
 	//Deallocate surface
 	SDL_FreeSurface( gBackground );
 	gBackground = NULL;
