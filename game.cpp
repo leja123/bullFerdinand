@@ -103,6 +103,18 @@ void addToLeaderboard(struct leaderboardEntry x){
     }
 }
 
+void showLeaderboard(){
+    struct leaderboardEntry a;
+    ifstream read("leaderboard.bin", ios::binary);
+    if(read.is_open()){
+        while(read.read((char*)&a, sizeof(a))){
+        cout<<a.playerName<<" "<<a.points<<endl;
+        }
+    }
+    else
+        cout<<"File not found";
+
+}
 
 Game::Game(){
 
@@ -179,6 +191,8 @@ void Game::leaderboard(){
 
                 SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
                 SDL_UpdateWindowSurface( gWindow );
+                showLeaderboard();
+                /*
                 cout<<"LEADERBOARD: "<<endl;
                 ifstream data;
                 string a;
@@ -186,6 +200,7 @@ void Game::leaderboard(){
                 data>>a;
                 cout<<a;
                 data.close();
+                */
 
             }
             close();
