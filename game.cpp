@@ -76,6 +76,33 @@ Enemy *enemy = NULL;
 ArenaEnemy *arenaEnemy = NULL;
 Door *door = NULL;
 
+struct leaderboardEntry {
+    char playerName[21];
+    int points;
+};
+
+void addToLeaderboard(struct leaderboardEntry x){
+    struct leaderboardEntry a;
+    bool z=true;
+    ofstream out("tmp.bin", ios::binary);
+    ofstream ustvarfajl("leaderboard.bin", ios::binary);
+    ifstream in("leaderboard.bin", ios::binary);
+    if(!in.is_open())
+        cout<<"File doesn't exist";
+    else{
+        while(in.read((char*)&a, sizeof(a))){
+            if(z && (a.points < x.points)){
+                out.write((char*)&x, sizeof(x));
+                z=false;
+            }
+            out.write((char*)&a, sizeof(a));
+        }
+        if(z){
+            out.write((char*)&x, sizeof(x));
+        }
+    }
+}
+
 
 Game::Game(){
 
@@ -187,7 +214,6 @@ void Game::menu(){
             //bool quit = false;
             bool repeat=true;
             int x;
-            char name[21];
             while(repeat){
                 cin>>x;
                 ofstream data;
@@ -469,12 +495,17 @@ srand(time(NULL));
                                                     arena = new Arena();
                                                 arenaEnemy = new ArenaEnemy();
                                                 }
-                                                else{
-                                                    ofstream data;
+                                                else{ //kanc igre
+                                                    struct leaderboardEntry tmp;
+                                                    strcpy(tmp.playerName, name);
+                                                    tmp.points=totalKills;
+                                                    addToLeaderboard(tmp);
+
+                                                    /*ofstream data;
                                                     data.open("scores.txt");
                                                     data<<totalKills;
                                                     data.close();
-                                                    replay();
+                                                    replay();*/
                                                 }
 
                                         }
@@ -667,7 +698,6 @@ srand(time(NULL));
                         SDL_BlitScaled( gBull, NULL, gScreenSurface, &destB );
                         if((door->xDoor+60 && bull->xBull>door->xDoor-60 && bull->yBull<door->yDoor+60 && bull->yBull>door->yDoor-60 ))
                         {
-
                             showBull=false;
                             delete bull;
                             delete door;

@@ -389,8 +389,9 @@
 	<SDL.h>
 	<iostream>
 
-1683058315 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
+1686599592 c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.h
 	"player.h"
+	<cstring>
 
 1683061317 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\game.cpp
 	<iostream>
@@ -406,7 +407,7 @@
 	<iostream>
 	<SDL.h>
 
-1683058021 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
+1683062524 source:c:\users\hp\desktop\leja\programiranje\c++\bullferdinand\player.cpp
 	<iostream>
 	"player.h"
 
