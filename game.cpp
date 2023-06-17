@@ -212,14 +212,6 @@ void Game::pause(){
         }
 }
 
-void Game::leaderboard(){
-    struct leaderboardEntry x;
-    strcpy(x.playerName, name );
-    x.points=0;
-    cout<<x.playerName<<" "<<x.points;
-    addToLeaderboard(x);
-    showLeaderboard();
-}
 
 
 
@@ -249,6 +241,7 @@ void Game::menu(){
                 switch(x)
                 {
                     case 1:
+                        cout<<"What is your name?"<<endl;
                         cin.ignore();
                         fgets(name, 21, stdin);
                         cout<<"Hello "<<name;
@@ -258,7 +251,7 @@ void Game::menu(){
                         pause();
                         break;
                     case 3:
-                        leaderboard();
+                        showLeaderboard();
                         break;
                     case 4:
                         repeat=false;
