@@ -86,6 +86,26 @@ struct Coordinates {
     int cY;
 };
 
+struct saveGame {
+    char sgName[21];
+    int sgKills;
+    int sgArenaEnemyKillCount;
+    int sgEnemyKillCount;
+    int sgXPlayer;
+    int sgYPlayer;
+    int sgArenaCount;
+    int sgLevel;
+    int sgXArena;
+    int sgYarena;
+    int sgXArenaEnemy;
+    int sgYarenaEnemy;
+    int sgXEnemy;
+    int sgYEnemy;
+
+};
+
+bool loadSavedGame=false;
+
 void addToLeaderboard(struct leaderboardEntry x){
     struct leaderboardEntry a;
     bool z=true;
@@ -176,7 +196,9 @@ void Game::pause(){
                         switch( e.key.keysym.sym )
                         {
                             case SDLK_ESCAPE:
+                                loadSavedGame=true;
                                 hidePauseScreen();
+                                run_game();
                                 break;
                         }
                     }
@@ -348,6 +370,51 @@ srand(time(NULL));
 
     bool bulletShow=false;
     bool firstShoot=true;
+
+    if(loadSavedGame){
+            struct saveGame tmp;
+            ifstream readSavedData("pause.bin", ios::binary);
+            if(readSavedData.is_open()){
+                while(readSavedData.read((char*)&tmp, sizeof(tmp))){
+                strcpy(name, tmp.sgName);
+                totalKills=tmp.sgKills;
+                arenaEnemyKillCount=tmp.sgArenaEnemyKillCount;
+                killCount=tmp.sgEnemyKillCount;
+                x.xPlayer=tmp.sgXPlayer;
+                x.yPlayer=tmp.sgYPlayer;
+                arenaCount=tmp.sgArenaCount;
+                level=tmp.sgLevel;
+                arena->xArena=tmp.sgXArena;
+                arena->yArena=tmp.sgYarena;
+                arenaEnemy->xArenaEnemy=tmp.sgXArenaEnemy;
+                arenaEnemy->yArenaEnemy=tmp.sgYarenaEnemy;
+                enemy->xEnemy=tmp.sgXEnemy;
+                enemy->yEnemy=tmp.sgYEnemy;
+                }
+            }
+            else
+                cout<<"Empty file\n";
+            loadSavedGame=false;
+
+    }
+
+
+
+       char sgName[21];
+    int sgKills;
+    int sgArenaEnemyKillCount;
+    int sgEnemyKillCount;
+    int sgXPlayer;
+    int sgYPlayer;
+    int sgArenaCount;
+    int sgLevel;
+    int sgXArena;
+    int sgYarena;
+    int sgXArenaEnemy;
+    int sgYarenaEnemy;
+    int sgXEnemy;
+    int sgYEnemy;
+
 
 	//Start up SDL and create window
 	if( !init() )
@@ -534,17 +601,27 @@ srand(time(NULL));
                                 break;
                             case SDLK_ESCAPE:
                                 {
-                                std::ofstream pauseData("pause.bin", std::ios::out | std::ios::binary);
+                                ofstream pauseData("pause.bin", ios::binary);
                                 if (pauseData.is_open())
                                 {
-                                    pauseData.write(reinterpret_cast<const char*>(&x.xPlayer), sizeof(x.xPlayer));
-                                    pauseData.write(reinterpret_cast<const char*>(&x.yPlayer), sizeof(x.yPlayer));
-                                    pauseData.write(reinterpret_cast<const char*>(&totalKills), sizeof(totalKills));
-                                    pauseData.write(reinterpret_cast<const char*>(&killCount), sizeof(killCount));
-                                    pauseData.write(reinterpret_cast<const char*>(&arenaEnemyKillCount), sizeof(arenaEnemyKillCount));
-                                    pauseData.write(reinterpret_cast<const char*>(&arenaCount), sizeof(arenaCount));
-                                    pauseData.write(reinterpret_cast<const char*>(&level), sizeof(level));
+                                    saveGame tmp;
+                                    strcpy(tmp.sgName, name);
+                                    tmp.sgKills=totalKills;
+                                    tmp.sgArenaEnemyKillCount=arenaEnemyKillCount;
+                                    tmp.sgEnemyKillCount=killCount;
+                                    tmp.sgXPlayer=x.xPlayer;
+                                    tmp.sgYPlayer=x.yPlayer;
+                                    tmp.sgArenaCount=arenaCount;
+                                    tmp.sgLevel=level;
+                                    tmp.sgXArena=arena->xArena;
+                                    tmp.sgYarena=arena->yArena;
+                                    tmp.sgXArenaEnemy=arenaEnemy->xArenaEnemy;
+                                    tmp.sgYarenaEnemy=arenaEnemy->yArenaEnemy;
+                                    tmp.sgXEnemy=enemy->xEnemy;
+                                    tmp.sgYEnemy=enemy->yEnemy;
+                                    pauseData.write((char*)&tmp, sizeof(tmp));
                                     pauseData.close();
+                                    close();
                                     pause();
                                 }
                                 break;
