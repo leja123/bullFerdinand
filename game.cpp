@@ -227,12 +227,8 @@ void Game::menu(){
                 switch(x)
                 {
                     case 1:
-                        cout<<"Enter your name: "<<endl;
-                        data.open("scores.txt");
                         cin.ignore();
                         fgets(name, 21, stdin);
-                        data<<name;
-                        data.close();
                         cout<<"Hello "<<name;
                         break;
                     case 2:
@@ -277,12 +273,6 @@ void savePlayerPosition(int &x, int &y) {
 
 }
 
-void loadPlayerPosition(int &x, int &y) {
-    ifstream inFile("player_position.bin", ios::in | ios::binary);
-    inFile.read(reinterpret_cast<char*>(&x), sizeof(x));
-    inFile.read(reinterpret_cast<char*>(&y), sizeof(y));
-    inFile.close();
-}
 
 
 void Game::replay() {
