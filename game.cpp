@@ -81,11 +81,15 @@ struct leaderboardEntry {
     int points;
 };
 
+struct Coordinates {
+    int cX;
+    int cY;
+};
+
 void addToLeaderboard(struct leaderboardEntry x){
     struct leaderboardEntry a;
     bool z=true;
     ofstream out("tmp.bin", ios::binary);
-    ofstream ustvarfajl("leaderboard.bin", ios::binary);
     ifstream in("leaderboard.bin", ios::binary);
     if(!in.is_open())
         cout<<"File doesn't exist";
@@ -94,13 +98,21 @@ void addToLeaderboard(struct leaderboardEntry x){
             if(z && (a.points < x.points)){
                 out.write((char*)&x, sizeof(x));
                 z=false;
+                cout<<"here3";
             }
             out.write((char*)&a, sizeof(a));
+                cout<<"here2";
         }
         if(z){
             out.write((char*)&x, sizeof(x));
+            cout<<endl<<x.playerName<<" "<<x.points<<endl;
+            cout<<"here";
         }
     }
+    out.close();
+    in.close();
+    remove("leaderboard.bin");
+    rename("tmp.bin", "leaderboard.bin");
 }
 
 void showLeaderboard(){
@@ -108,8 +120,9 @@ void showLeaderboard(){
     ifstream read("leaderboard.bin", ios::binary);
     if(read.is_open()){
         while(read.read((char*)&a, sizeof(a))){
-        cout<<a.playerName<<" "<<a.points<<endl;
+            cout<<a.playerName<<" "<<a.points<<endl;
         }
+        cout<<"File is empty";
     }
     else
         cout<<"File not found";
@@ -188,9 +201,13 @@ void Game::leaderboard(){
             }
             else
             {
-
+                struct leaderboardEntry x;
+                strcpy(x.playerName, name );
+                x.points=0;
+                cout<<x.playerName<<" "<<x.points;
                 SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
                 SDL_UpdateWindowSurface( gWindow );
+                addToLeaderboard(x);
                 showLeaderboard();
                 /*
                 cout<<"LEADERBOARD: "<<endl;
@@ -275,11 +292,14 @@ void Game::menu(){
 }
 
 
-void savePlayerPosition(int x, int y) {
-    ofstream outFile("player_position.bin", ios::out | ios::binary);
-    outFile.write(reinterpret_cast<const char*>(&x), sizeof(x));
-    outFile.write(reinterpret_cast<const char*>(&y), sizeof(y));
+void savePlayerPosition(int &x, int &y) {
+    struct Coordinates tmp;
+    tmp.cX=x;
+    tmp.cY=y;
+    ofstream outFile("player_position.bin", ios::binary | ios::app);
+    outFile.write((char*)&tmp, sizeof(tmp));
     outFile.close();
+
 }
 
 void loadPlayerPosition(int &x, int &y) {
@@ -291,7 +311,7 @@ void loadPlayerPosition(int &x, int &y) {
 
 
 void Game::replay() {
-    if (!init()) {
+    /*if (!init()) {
         cout << "Failed to initialize!\n";
         return;
     }
@@ -302,45 +322,93 @@ void Game::replay() {
     }
 
     // Load player position from file
-    Player y;
+
+
+    /*while (true) {
+        Player y;
+        SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+
+        struct Coordinates tmp;
+        ifstream inFile("player_position.bin", ios::binary);
+        if(inFile.is_open()){
+            while(inFile.read((char*)&tmp, sizeof(tmp))){
+                y.xPlayer=tmp.cX;
+                y.yPlayer=tmp.cY;
+                SDL_Rect destReplay;
+                destReplay.x = y.xPlayer;
+                destReplay.y = y.yPlayer;
+                destReplay.w = 60;
+                destReplay.h = 60;
+                SDL_BlitScaled(gPlayer, NULL, gScreenSurface, &destReplay);
+
+                SDL_UpdateWindowSurface(gWindow);
+                SDL_Delay(50);
+            }
+        }
+    } SDL_Rect destReplay;
+                destReplay.x = 100;
+                destReplay.y = 100;
+                destReplay.w = 60;
+                destReplay.h = 60;
+                SDL_BlitScaled(gPlayer, NULL, gScreenSurface, &destReplay);
+
+                SDL_UpdateWindowSurface(gWindow);
+                SDL_Delay(50);
+*/
+if (!init()) {
+        cout << "Failed to initialize!\n";
+        return;
+    }
+    else {
+         if (!loadMedia()) {
+        cout << "Failed to load media!\n";
+        return;
+    }
+    else {
 
     while (true) {
         SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
 
-        SDL_Event e;
-        bool quit = false;
-        while (!quit) {
-            while (SDL_PollEvent(&e) != 0) {
-                if (e.type == SDL_QUIT) {
-                    quit = true;
-                }
-            }
-            // Move player according to the loaded position
-            if (y.yPlayer > 0) {
-                y.yPlayer -= 1;
-            }
-            if (y.xPlayer > 0) {
-                y.xPlayer -= 1;
-            }
-            if (y.yPlayer <= 0 && y.xPlayer > 0 && y.xPlayer < 1280 - 60) {
-                y.xPlayer -= 1;
-            }
-            if (y.yPlayer <= 0 && y.xPlayer >= 1280 - 60) {
-                y.yPlayer += 1;
-            }
+        struct Coordinates tmp;
+        ifstream inFile("player_position.bin", ios::binary);
+        if(!inFile.is_open()){
+            cout<<"Not open";
+        }
+        else {
+            while(inFile.read((char*)&tmp, sizeof(tmp))){
+
+
             SDL_Rect destReplay;
-            destReplay.x = y.xPlayer;
-            destReplay.y = y.yPlayer;
+            destReplay.x = tmp.cX;
+            destReplay.y = tmp.cY;
             destReplay.w = 60;
             destReplay.h = 60;
+
+
+            SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
             SDL_BlitScaled(gPlayer, NULL, gScreenSurface, &destReplay);
 
             SDL_UpdateWindowSurface(gWindow);
+
+
             SDL_Delay(50);
         }
+
+       }
     }
+    }
+
+    }
+
+    // Load player position from file
+
+
 }
+
+
+
 
 
 
@@ -515,7 +583,8 @@ srand(time(NULL));
                                                     strcpy(tmp.playerName, name);
                                                     tmp.points=totalKills;
                                                     addToLeaderboard(tmp);
-
+                                                    showLeaderboard();
+                                                    replay();
                                                     /*ofstream data;
                                                     data.open("scores.txt");
                                                     data<<totalKills;
