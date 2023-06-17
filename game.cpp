@@ -98,15 +98,12 @@ void addToLeaderboard(struct leaderboardEntry x){
             if(z && (a.points < x.points)){
                 out.write((char*)&x, sizeof(x));
                 z=false;
-                cout<<"here3";
             }
             out.write((char*)&a, sizeof(a));
-                cout<<"here2";
         }
         if(z){
             out.write((char*)&x, sizeof(x));
             cout<<endl<<x.playerName<<" "<<x.points<<endl;
-            cout<<"here";
         }
     }
     out.close();
@@ -118,14 +115,20 @@ void addToLeaderboard(struct leaderboardEntry x){
 void showLeaderboard(){
     struct leaderboardEntry a;
     ifstream read("leaderboard.bin", ios::binary);
-    if(read.is_open()){
-        while(read.read((char*)&a, sizeof(a))){
-            cout<<a.playerName<<" "<<a.points<<endl;
+    if (read.is_open()) {
+        cout<<endl<<endl<< "Leaderboard:\n";
+        int c = 0;
+        while (c < 5 && read.read((char*)&a, sizeof(a))) {
+            cout << a.playerName << " " << a.points << endl;
+            c++;
         }
-        cout<<"File is empty";
+
+        if (c == 0) {
+            cout << "File is empty";
+        }
+    } else {
+        cout << "File not found";
     }
-    else
-        cout<<"File not found";
 
 }
 
@@ -188,40 +191,12 @@ void Game::pause(){
 }
 
 void Game::leaderboard(){
-    if( !init() )
-        {
-            cout<<"Failed to initialize!\n";
-        }
-        else
-        {
-            //Load media
-            if( !loadMedia() )
-            {
-                cout<<"Failed to load media!\n";
-            }
-            else
-            {
-                struct leaderboardEntry x;
-                strcpy(x.playerName, name );
-                x.points=0;
-                cout<<x.playerName<<" "<<x.points;
-                SDL_BlitSurface( gBackground, NULL, gScreenSurface, NULL );
-                SDL_UpdateWindowSurface( gWindow );
-                addToLeaderboard(x);
-                showLeaderboard();
-                /*
-                cout<<"LEADERBOARD: "<<endl;
-                ifstream data;
-                string a;
-                data.open("scores.txt");
-                data>>a;
-                cout<<a;
-                data.close();
-                */
-
-            }
-            close();
-        }
+    struct leaderboardEntry x;
+    strcpy(x.playerName, name );
+    x.points=0;
+    cout<<x.playerName<<" "<<x.points;
+    addToLeaderboard(x);
+    showLeaderboard();
 }
 
 
@@ -311,100 +286,50 @@ void loadPlayerPosition(int &x, int &y) {
 
 
 void Game::replay() {
-    /*if (!init()) {
-        cout << "Failed to initialize!\n";
-        return;
-    }
-
-    if (!loadMedia()) {
-        cout << "Failed to load media!\n";
-        return;
-    }
-
-    // Load player position from file
-
-
-    /*while (true) {
-        Player y;
-        SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-
-        struct Coordinates tmp;
-        ifstream inFile("player_position.bin", ios::binary);
-        if(inFile.is_open()){
-            while(inFile.read((char*)&tmp, sizeof(tmp))){
-                y.xPlayer=tmp.cX;
-                y.yPlayer=tmp.cY;
-                SDL_Rect destReplay;
-                destReplay.x = y.xPlayer;
-                destReplay.y = y.yPlayer;
-                destReplay.w = 60;
-                destReplay.h = 60;
-                SDL_BlitScaled(gPlayer, NULL, gScreenSurface, &destReplay);
-
-                SDL_UpdateWindowSurface(gWindow);
-                SDL_Delay(50);
-            }
-        }
-    } SDL_Rect destReplay;
-                destReplay.x = 100;
-                destReplay.y = 100;
-                destReplay.w = 60;
-                destReplay.h = 60;
-                SDL_BlitScaled(gPlayer, NULL, gScreenSurface, &destReplay);
-
-                SDL_UpdateWindowSurface(gWindow);
-                SDL_Delay(50);
-*/
-if (!init()) {
-        cout << "Failed to initialize!\n";
-        return;
-    }
-    else {
-         if (!loadMedia()) {
-        cout << "Failed to load media!\n";
-        return;
-    }
-    else {
-
-    while (true) {
-        SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-
-        struct Coordinates tmp;
-        ifstream inFile("player_position.bin", ios::binary);
-        if(!inFile.is_open()){
-            cout<<"Not open";
+    if (!init()) {
+            cout << "Failed to initialize!\n";
+            return;
         }
         else {
-            while(inFile.read((char*)&tmp, sizeof(tmp))){
+             if (!loadMedia()) {
+            cout << "Failed to load media!\n";
+            return;
+        }
+        else {
 
-
-            SDL_Rect destReplay;
-            destReplay.x = tmp.cX;
-            destReplay.y = tmp.cY;
-            destReplay.w = 60;
-            destReplay.h = 60;
-
-
+        while (true) {
             SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
-            SDL_BlitScaled(gPlayer, NULL, gScreenSurface, &destReplay);
-
             SDL_UpdateWindowSurface(gWindow);
 
+            struct Coordinates tmp;
+            ifstream inFile("player_position.bin", ios::binary);
+            if(!inFile.is_open()){
+                cout<<"Not open";
+            }
+            else {
+                while(inFile.read((char*)&tmp, sizeof(tmp))){
 
-            SDL_Delay(50);
+                SDL_Rect destReplay;
+                destReplay.x = tmp.cX;
+                destReplay.y = tmp.cY;
+                destReplay.w = 60;
+                destReplay.h = 60;
+
+
+                SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
+                SDL_BlitScaled(gPlayer, NULL, gScreenSurface, &destReplay);
+
+                SDL_UpdateWindowSurface(gWindow);
+
+
+                SDL_Delay(50);
+            }
+
+           }
+        }
         }
 
-       }
     }
-    }
-
-    }
-
-    // Load player position from file
-
-
 }
 
 
