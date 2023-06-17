@@ -261,12 +261,12 @@ void Game::menu(){
                         leaderboard();
                         break;
                     case 4:
-                        replay();
-                        break;
-                    case 5:
                         repeat=false;
                         run_game();
-                    break;
+                        break;
+                    case 5:
+                        close();
+                        break;
                 }
 
             }
@@ -376,20 +376,20 @@ srand(time(NULL));
             ifstream readSavedData("pause.bin", ios::binary);
             if(readSavedData.is_open()){
                 while(readSavedData.read((char*)&tmp, sizeof(tmp))){
-                strcpy(name, tmp.sgName);
-                totalKills=tmp.sgKills;
-                arenaEnemyKillCount=tmp.sgArenaEnemyKillCount;
-                killCount=tmp.sgEnemyKillCount;
-                x.xPlayer=tmp.sgXPlayer;
-                x.yPlayer=tmp.sgYPlayer;
-                arenaCount=tmp.sgArenaCount;
-                level=tmp.sgLevel;
-                arena->xArena=tmp.sgXArena;
-                arena->yArena=tmp.sgYarena;
-                arenaEnemy->xArenaEnemy=tmp.sgXArenaEnemy;
-                arenaEnemy->yArenaEnemy=tmp.sgYarenaEnemy;
-                enemy->xEnemy=tmp.sgXEnemy;
-                enemy->yEnemy=tmp.sgYEnemy;
+                    strcpy(name, tmp.sgName);
+                    totalKills=tmp.sgKills;
+                    arenaEnemyKillCount=tmp.sgArenaEnemyKillCount;
+                    killCount=tmp.sgEnemyKillCount;
+                    x.xPlayer=tmp.sgXPlayer;
+                    x.yPlayer=tmp.sgYPlayer;
+                    arenaCount=tmp.sgArenaCount;
+                    level=tmp.sgLevel;
+                    arena->xArena=tmp.sgXArena;
+                    arena->yArena=tmp.sgYarena;
+                    arenaEnemy->xArenaEnemy=tmp.sgXArenaEnemy;
+                    arenaEnemy->yArenaEnemy=tmp.sgYarenaEnemy;
+                    enemy->xEnemy=tmp.sgXEnemy;
+                    enemy->yEnemy=tmp.sgYEnemy;
                 }
             }
             else
@@ -397,23 +397,6 @@ srand(time(NULL));
             loadSavedGame=false;
 
     }
-
-
-
-       char sgName[21];
-    int sgKills;
-    int sgArenaEnemyKillCount;
-    int sgEnemyKillCount;
-    int sgXPlayer;
-    int sgYPlayer;
-    int sgArenaCount;
-    int sgLevel;
-    int sgXArena;
-    int sgYarena;
-    int sgXArenaEnemy;
-    int sgYarenaEnemy;
-    int sgXEnemy;
-    int sgYEnemy;
 
 
 	//Start up SDL and create window
@@ -558,20 +541,17 @@ srand(time(NULL));
                                                     }
                                                 if(level<3){
                                                     arena = new Arena();
-                                                arenaEnemy = new ArenaEnemy();
+                                                    arenaEnemy = new ArenaEnemy();
                                                 }
                                                 else{ //kanc igre
-                                                    struct leaderboardEntry tmp;
-                                                    strcpy(tmp.playerName, name);
-                                                    tmp.points=totalKills;
-                                                    addToLeaderboard(tmp);
-                                                    showLeaderboard();
-                                                    replay();
-                                                    /*ofstream data;
-                                                    data.open("scores.txt");
-                                                    data<<totalKills;
-                                                    data.close();
-                                                    replay();*/
+                                                    if(bullIsSafe){
+                                                        struct leaderboardEntry tmp;
+                                                        strcpy(tmp.playerName, name);
+                                                        tmp.points=totalKills;
+                                                        addToLeaderboard(tmp);
+                                                        showLeaderboard();
+                                                        replay();
+                                                    }
                                                 }
 
                                         }
@@ -777,6 +757,10 @@ srand(time(NULL));
                             showBull=false;
                             delete bull;
                             delete door;
+                            if(level==2){
+                                bullIsSafe=true;
+                            }
+
                         }
             }
 
